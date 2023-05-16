@@ -11,8 +11,10 @@
     <title>CRUD</title>
 </head>
 <body>
+    <div class="container-add">
+        <div class="add actionButton" onclick="changeDisplay('formularioCadastro')" id="addClientButton"><p>Add Client</p></div>
+    </div>
     <div class="container">
-        <div class="add actionButton"><p>Add Client</p></div>
         <div class="caption">
             <p>ID</p>
             <p>NOME</p>
@@ -29,6 +31,12 @@
             </div>
         </div>
     </div>
+    <form action="" class="formCadastro">
+        <h1>Preencha os campos</h1>
+        <label>Nome:<input type="text" name="" id="nomeCadastro"></label>
+        <label for="">Telefone:<input type="tel" name="" id="telefoneCadastro"></label>
+        <div class="submitButton" onclick="addClient()"><p>Cadastrar</p></div>
+    </form>
     <script src="main.js"></script>
 </body>
 </html>
