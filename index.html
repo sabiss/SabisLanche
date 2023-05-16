@@ -11,6 +11,8 @@
     <title>CRUD</title>
 </head>
 <body>
+    <div class="arrowContainer" onclick="changeDisplay('telaInicio')"><img src="arrowBack.png" alt="" ></div>
+    
     <div class="container-add">
         <div class="add actionButton" onclick="changeDisplay('formularioCadastro')" id="addClientButton"><p>Add Client</p></div>
     </div>
@@ -22,11 +24,11 @@
             <p>AÇÃO</p>
         </div>
         <div class="client">
-            <p>1</p>
+            <p>-1</p>
             <p>Sabrina</p>
             <p>123654</p>
             <div class="container-actionButton">
-                <div class="actionButton yellow"><p>Edit</p></div>
+                <div class="actionButton yellow" onclick="changeDisplay('formularioEdit', -1)"><p>Edit</p></div>
                 <div class="actionButton red"><p>Del</p></div>
             </div>
         </div>
@@ -37,6 +39,15 @@
         <label for="">Telefone:<input type="tel" name="" id="telefoneCadastro"></label>
         <div class="submitButton" onclick="addClient()"><p>Cadastrar</p></div>
     </form>
+    <form action="" class="formEdit">
+        <h1>O que deseja editar?</h1>
+        <label for="">Nome:<input type="radio" name="campo" value="nome"></label>
+        <label for="">Telefone:<input type="radio" name="campo" value="telefone"></label>
+        <label>Insira o novo valor:<input type="text" id="novoValor"></label>
+        <div class="submitButton" onclick="editClient()"><p>Cadastrar</p></div>
+    </form>
     <script src="main.js"></script>
+
+    
 </body>
 </html>
