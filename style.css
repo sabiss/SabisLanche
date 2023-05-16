@@ -110,3 +110,88 @@ form{
     justify-content: space-evenly;
     align-items: center;
 }
+/* Estilos para telas grandes */
+@media (min-width: 1200px) {
+    body {
+      padding: 50px;
+    }
+  
+    .container-add {
+      padding: 20px;
+    }
+  
+    form {
+      height: 600px;
+      width: 500px;
+    }
+  }
+  
+  /* Estilos para telas médias */
+  @media (max-width: 1199px) and (min-width: 992px) {
+    body {
+      padding: 40px;
+    }
+  
+    .container-add {
+      padding: 15px;
+    }
+  
+    form {
+      height: 550px;
+      width: 450px;
+    }
+  }
+  
+  /* Estilos para tablets em orientação retrato */
+  @media (max-width: 991px) and (min-width: 768px) {
+    body {
+      padding: 30px;
+    }
+  
+    .container-add {
+      padding: 10px;
+    }
+  
+    form {
+      height: 500px;
+      width: 350px;
+    }
+  }
+  
+  /* Estilos para tablets em orientação paisagem e dispositivos móveis grandes */
+  @media (max-width: 767px) and (orientation: landscape), (max-width: 767px) and (max-height: 480px) {
+    body {
+      padding: 20px;
+    }
+  
+    .container-add {
+      padding: 10px;
+    }
+  
+    form {
+      height: 400px;
+      width: 300px;
+    }
+  }
+  
+  /* Estilos para dispositivos móveis */
+  @media (max-width: 479px) {
+    body {
+      padding: 10px;
+    }
+  
+    .container-add {
+      padding: 5px;
+    }
+  
+    form {
+      height: auto;
+      width: 100%;
+      max-width: 300px;
+    }
+    .actionButton,
+  .submitButton {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+  }
