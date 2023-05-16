@@ -5,6 +5,16 @@ body{
     align-items: center;
     padding: 30px;
     font-family: 'Roboto', sans-serif;
+    position: relative;
+}
+.arrowContainer{
+    width: 100%;
+    display: none;
+    justify-content: flex-start;
+    align-items: center;
+}
+.arrowContainer img:hover{
+    cursor: pointer;
 }
 .container{
     display: flex;
