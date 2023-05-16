@@ -87,6 +87,24 @@ function createClientContainer(){
         clientDiv.appendChild(pTelefone);
         clientDiv.appendChild(containerActionButtons);
 
+        const caption = document.createElement('div');
+        caption.className="caption";
+
+        const p1 = document.createElement('p')
+        const p2 = document.createElement('p')
+        const p3 = document.createElement('p')
+        const p4 = document.createElement('p')
+        p1.appendChild(document.createTextNode("ID"))
+        p2.appendChild(document.createTextNode("NOME"))
+        p3.appendChild(document.createTextNode("TELEFONE"))
+        p4.appendChild(document.createTextNode("AÇAÕ"))
+
+        caption.appendChild(p1);
+        caption.appendChild(p2);
+        caption.appendChild(p3);
+        caption.appendChild(p4);
+
+        fatherDiv.appendChild(caption);
         fatherDiv.appendChild(clientDiv);
     }
     
