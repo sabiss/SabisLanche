@@ -178,6 +178,7 @@ form{
   @media (max-width: 479px) {
     body {
       padding: 10px;
+      min-height: 100vh;
     }
   
     .container-add {
@@ -185,9 +186,8 @@ form{
     }
   
     form {
-      height: auto;
-      width: 100%;
-      max-width: 300px;
+        width: 100%;
+        max-width: 300px;
     }
     .actionButton,
   .submitButton {
