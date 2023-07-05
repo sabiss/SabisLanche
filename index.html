@@ -1,53 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <title>CRUD</title>
-</head>
-<body>
-    <div class="arrowContainer" onclick="changeDisplay('telaInicio')"><img src="arrowBack.png" alt="" ></div>
-    
-    <div class="container-add">
-        <div class="add actionButton" onclick="changeDisplay('formularioCadastro')" id="addClientButton"><p>Add Client</p></div>
-    </div>
-    <div class="container">
-        <div class="caption">
-            <p>ID</p>
-            <p>NOME</p>
-            <p>TELEFONE</p>
-            <p>AÇÃO</p>
-        </div>
-        <div class="client">
-            <p>-1</p>
-            <p>Sabrina</p>
-            <p>123654</p>
-            <div class="container-actionButton">
-                <div class="actionButton yellow" onclick="changeDisplay('formularioEdit', -1)"><p>Edit</p></div>
-                <div class="actionButton red"><p>Del</p></div>
-            </div>
-        </div>
-    </div>
-    <form action="" class="formCadastro">
-        <h1>Preencha os campos</h1>
-        <label>Nome:<input type="text" name="" id="nomeCadastro"></label>
-        <label for="">Telefone:<input type="tel" name="" id="telefoneCadastro"></label>
-        <div class="submitButton" onclick="addClient()"><p>Cadastrar</p></div>
-    </form>
-    <form action="" class="formEdit">
-        <h1>O que deseja editar?</h1>
-        <label for="">Nome:<input type="radio" name="campo" value="nome"></label>
-        <label for="">Telefone:<input type="radio" name="campo" value="telefone"></label>
-        <label>Insira o novo valor:<input type="text" id="novoValor"></label>
-        <div class="submitButton" onclick="editClient()"><p>Cadastrar</p></div>
-    </form>
-    <script src="main.js"></script>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agenda Telefônica</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" rel="stylesheet">
 
-    
-</body>
+  </head>
+  <body>
+    <nav class="navbar" style="background: rgb(53, 53, 53);">
+        <div class="container-fluid">
+          <a class="navbar-brand text-light">Navbar</a>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+    </nav>
+
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Excluir</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>(84)99999-9999</td>
+            <td><i class="bi bi-pencil-square" style="cursor: pointer;"></i></i></td>
+            <td><i class="bi bi-trash" style="cursor: pointer"></i></td>
+          </tr>
+        </tbody>
+    </table>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  </body>
 </html>
