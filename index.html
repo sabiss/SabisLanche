@@ -11,7 +11,7 @@
   <body>
     <nav class="navbar" style="background: rgb(53, 53, 53);">
         <div class="container-fluid">
-          <a class="navbar-brand text-light">Agenda <span style="font-weight: bold;">Telefônica</span></a>
+          <a class="navbar-brand text-light">Sabis <span style="font-weight: bold;">Lanches</span> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACNklEQVR4nO2YP28TQRDFH0FKSZ8WkYJvAAUpgApTYJ+Ako5vcHaFqBFItCA6QEFKSUHhXScoHaGERCH8+QLnJMI3c865GbTYoMg42Lvn49b4nvSkk+4093u7OzeygVKlSs2PZA2LicJtUlhlhV3SINaQLCZTw9RSWE2auGXekQs8KwSk8TUr8NhACl+4idrUwGUNp1nhUd7gPGyFh3IfC5kD2MCnHyHpB/f7/GeIB1nhA5tVM3AG0vU+j/YNJ3jTTD/PY44rnk6wI6Txzamxzdcm7xVPJ9yRpIWb1gFI4ZVt4029B/Rvv7QPoLFnHSCfHhAzJ1x2IHZYqVxMCrF1gKKhecjzE4CC8DoF4VYEiE+mINyiaqMyFp6DuhgXDRwN+RcX18KTBxvV6u99D0C18N3J5z6od3wPwEG98//uAFUblRkIcO3vjVxtVEzKooGjIRumsfDH1fsM8cmwVdHAvbkNQBaTuL0ESV64QyXP+zWKncSnIJ07kHR7cnDzbOcuJFrwaBLvL0O6r8fDH72BHJz3dBK3FyFxCOl9GgG/B4nv9Z/xfhIfXoSkm8eOzCbk8MKMTeL2GQg/7ttcZ63HczeJyaPfxKzxHbYy/wR4AC4D77gEeOYBuBiTwhPrALHC1aLBeeC4hcvWAQa7sF40PGm8hau6CmdZISowwH53A+eQRUkLK6xwUAR8onEJ09BRE8ussfHP4BXWM6/8KMVNXGGNp+azNs05Qf1aO6a2c8OWKlUKM6kf/EoyLJ/Aq6AAAAAASUVORK5CYII="></a>
           <form class="d-flex justify-content-around" role="search">
             <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
             <button type="button" class="btn btn-success me-2">Buscar</button>
@@ -19,27 +19,6 @@
           </form>
         </div>
     </nav>
-
-    <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Telefone</th>
-            <th scope="col">Editar</th>
-            <th scope="col">Excluir</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>(84)99999-9999</td>
-            <td><i class="bi bi-pencil-square text-warning" style="cursor: pointer;"></i></i></td>
-            <td><i class="bi bi-trash text-danger" style="cursor: pointer"></i></td>
-          </tr>
-        </tbody>
-    </table>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -50,12 +29,36 @@
           </div>
           <div class="modal-body">
             <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">Nome</label>
-              <input type="text" class="form-control" id="exampleFormControlInput1">
+              <label for="nome" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="nome">
             </div>
             <div class="mb-3">
-              <label for="exampleFormControlTel" class="form-label">Telefone</label>
-              <input type="tel" class="form-control" id="exampleFormControlTel" onkeyup="handlePhone(event)">
+              <label for="telefone" class="form-label">Telefone</label>
+              <input type="tel" class="form-control" id="telefone" onkeyup="handlePhone(event)">
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">
+                Hamburguer
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="c1">
+              <label class="form-check-label" for="c1">
+                Milshake
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="c2">
+              <label class="form-check-label" for="c2">
+                Batata Frita
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="c3">
+              <label class="form-check-label" for="c3">
+                Refrigerante
+              </label>
             </div>
           </div>
           <div class="modal-footer">
