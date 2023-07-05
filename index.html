@@ -6,12 +6,13 @@
     <title>Agenda Telefônica</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" rel="stylesheet">
-
+    <link href="style.css" rel="stylesheet">
   </head>
   <body>
-    <nav class="navbar" style="background: rgb(53, 53, 53);">
+    <header>
+      <nav class="navbar" style="background: rgb(53, 53, 53);">
         <div class="container-fluid">
-          <a class="navbar-brand text-light">Sabis <span style="font-weight: bold;">Lanches</span> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACNklEQVR4nO2YP28TQRDFH0FKSZ8WkYJvAAUpgApTYJ+Ako5vcHaFqBFItCA6QEFKSUHhXScoHaGERCH8+QLnJMI3c865GbTYoMg42Lvn49b4nvSkk+4093u7OzeygVKlSs2PZA2LicJtUlhlhV3SINaQLCZTw9RSWE2auGXekQs8KwSk8TUr8NhACl+4idrUwGUNp1nhUd7gPGyFh3IfC5kD2MCnHyHpB/f7/GeIB1nhA5tVM3AG0vU+j/YNJ3jTTD/PY44rnk6wI6Txzamxzdcm7xVPJ9yRpIWb1gFI4ZVt4029B/Rvv7QPoLFnHSCfHhAzJ1x2IHZYqVxMCrF1gKKhecjzE4CC8DoF4VYEiE+mINyiaqMyFp6DuhgXDRwN+RcX18KTBxvV6u99D0C18N3J5z6od3wPwEG98//uAFUblRkIcO3vjVxtVEzKooGjIRumsfDH1fsM8cmwVdHAvbkNQBaTuL0ESV64QyXP+zWKncSnIJ07kHR7cnDzbOcuJFrwaBLvL0O6r8fDH72BHJz3dBK3FyFxCOl9GgG/B4nv9Z/xfhIfXoSkm8eOzCbk8MKMTeL2GQg/7ttcZ63HczeJyaPfxKzxHbYy/wR4AC4D77gEeOYBuBiTwhPrALHC1aLBeeC4hcvWAQa7sF40PGm8hau6CmdZISowwH53A+eQRUkLK6xwUAR8onEJ09BRE8ussfHP4BXWM6/8KMVNXGGNp+azNs05Qf1aO6a2c8OWKlUKM6kf/EoyLJ/Aq6AAAAAASUVORK5CYII="></a>
+          <a class="navbar-brand text-light">Sabis <span style="font-weight: bold;">Lanches</span> <img width="48" height="48" src="https://img.icons8.com/color-glass/48/cheeseburger.png" alt="cheeseburger"/></a><!--<a  href="https://icons8.com/icon/E3l2HAe3zEBV/x-burger">X-Burger</a> icon by <a href="https://icons8.com">Icons8</a>-->
           <form class="d-flex justify-content-around" role="search">
             <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
             <button type="button" class="btn btn-success me-2">Buscar</button>
@@ -19,6 +20,25 @@
           </form>
         </div>
     </nav>
+    </header>
+    <main class="flex-d justify-content-around p-3">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Pedido #0</h5>
+          <p class="card-text"><span class="negrito">Endereço: </span>rua dos bobos<br><span class="negrito">Bairro:</span> campim áspero<br><span class="negrito">Número:</span> 123</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">An item</li>
+          <li class="list-group-item">A second item</li>
+          <li class="list-group-item">A third item</li>
+        </ul>
+        <div class="card-body d-flex flex-column ">
+          <button type="button" class="btn btn-danger mb-2" >Cancelar Pedido</button>
+          <button type="button" class="btn btn-success">Pedido Concluído</button>
+        </div>
+      </div>
+    </main>
+    
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
