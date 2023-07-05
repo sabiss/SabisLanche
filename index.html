@@ -21,16 +21,14 @@
         </div>
     </nav>
     </header>
-    <main class="flex-d justify-content-around p-3">
+    <main class="flex-d justify-content-around p-3 align-items-center" id="cardsContainer">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Pedido #0</h5>
           <p class="card-text"><span class="negrito">Endereço: </span>rua dos bobos<br><span class="negrito">Bairro:</span> campim áspero<br><span class="negrito">Número:</span> 123</p>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">An item</li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
+          <li class="list-group-item">item do pedido</li>
         </ul>
         <div class="card-body d-flex flex-column ">
           <button type="button" class="btn btn-danger mb-2" >Cancelar Pedido</button>
@@ -40,7 +38,7 @@
     </main>
     
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="cardsContainer">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -49,16 +47,31 @@
           </div>
           <div class="modal-body">
             <div class="mb-3">
-              <label for="nome" class="form-label">Nome</label>
+              <label for="nome" class="form-label">Nome do destinatário</label>
               <input type="text" class="form-control" id="nome">
             </div>
             <div class="mb-3">
               <label for="telefone" class="form-label">Telefone</label>
               <input type="tel" class="form-control" id="telefone" onkeyup="handlePhone(event)">
             </div>
+            <div class="modal-header" style="border-top: 1px solid rgb(202, 202, 202)">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Endereço</h1>
+            </div>
+            <div class="mb-3">
+              <label for="rua" class="form-label">Rua</label>
+              <input type="text" class="form-control" id="rua">
+            </div>
+            <div class="mb-3">
+              <label for="numero" class="form-label">Número</label>
+              <input type="number" class="form-control" id="numero">
+            </div>
+            <div class="mb-3">
+              <label for="bairro" class="form-label">Bairro</label>
+              <input type="text" class="form-control" id="bairro">
+            </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
+              <input class="form-check-input" type="checkbox" value="" id="c0">
+              <label class="form-check-label" for="c0">
                 Hamburguer
               </label>
             </div>
