@@ -8,35 +8,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
   </head>
-  <body>
+  <body class="fastFood">
     <header>
       <nav class="navbar" style="background: rgb(53, 53, 53);">
         <div class="container-fluid">
           <a class="navbar-brand text-light">Sabis <span style="font-weight: bold;">Lanches</span> <img width="48" height="48" src="https://img.icons8.com/color-glass/48/cheeseburger.png" alt="cheeseburger"/></a><!--<a  href="https://icons8.com/icon/E3l2HAe3zEBV/x-burger">X-Burger</a> icon by <a href="https://icons8.com">Icons8</a>-->
           <form class="d-flex justify-content-around" role="search">
             <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
-            <button type="button" class="btn btn-success me-2">Buscar</button>
-            <button type="button" class="btn btn-primary" style="border-radius: 50%;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-plus-lg"></i></button>
+            <button type="button" class="btn me-2" style="background-color: #e80c06;color: white;">Buscar</button>
+            <button type="button" class="btn" style="border-radius: 50%; background-color: 
+            #f5c924; color: white;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-plus-lg"></i></button>
           </form>
         </div>
     </nav>
     </header>
-    <main class="flex-d justify-content-around p-3 align-items-center" id="cardsContainer">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Pedido #0</h5>
-          <p class="card-text"><span class="negrito">Endereço: </span>rua dos bobos<br><span class="negrito">Bairro:</span> campim áspero<br><span class="negrito">Número:</span> 123</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">item do pedido</li>
-        </ul>
-        <div class="card-body d-flex flex-column ">
-          <button type="button" class="btn btn-danger mb-2" >Cancelar Pedido</button>
-          <button type="button" class="btn btn-success">Pedido Concluído</button>
-        </div>
-      </div>
-    </main>
-    
+    <main class="d-flex justify-content-around p-3 align-items-center flex-wrap" id="cardsContainer"></main>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="cardsContainer">
       <div class="modal-dialog">
@@ -70,25 +56,25 @@
               <input type="text" class="form-control" id="bairro">
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="c0">
+              <input class="form-check-input" type="checkbox" value="Hamburguer" id="Hamburguer" name="">
               <label class="form-check-label" for="c0">
                 Hamburguer
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="c1">
+              <input class="form-check-input" type="checkbox" value="Milshake" id="Milshake">
               <label class="form-check-label" for="c1">
                 Milshake
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="c2">
+              <input class="form-check-input" type="checkbox" value="Batata_frita" id="Batata_frita">
               <label class="form-check-label" for="c2">
                 Batata Frita
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="c3">
+              <input class="form-check-input" type="checkbox" value="Refrigerante" id="Refrigerante">
               <label class="form-check-label" for="c3">
                 Refrigerante
               </label>
