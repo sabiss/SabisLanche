@@ -1,3 +1,9 @@
+body{
+  height: 100%;
+}
 .negrito{
   font-weight: bold;
+}
+.fastFood{
+  background: url(pexels-valeria-boltneva-1639557.jpg) center /cover no-repeat ;
 }
