@@ -22,11 +22,11 @@ async function cancelarPedido(id){
     try {
         console.log(baseUrl+"/"+id)
         await fetch(baseUrl + "/" + id, { method: "DELETE" });
-        formarCard();
     }
     catch(error){
         console.log("Vixi, Deu erro: " + error);
     }
+    formarCard();
 }
 function cadastrar(){
     const nomeDestinatario = document.querySelector('input#nome').value
@@ -35,19 +35,20 @@ function cadastrar(){
     const bairro = document.querySelector('input#bairro').value
     const numero = document.querySelector('input#numero').value
     let pedidos = document.querySelectorAll('input[type="checkbox"]');
-    pedidos = organizaPedidos(pedidos);
+    const listaDePedidos = organizarPedidos(pedidos);
 
-    ordemDoPedido = {
+    const ordemDoPedido = {
         "nomeDestinatario": nomeDestinatario,
         "telefone": telefone,
         "rua": rua,
         "bairro":bairro,
         "numero":numero,
-        "pedidos": pedidos
+        "pedidos": listaDePedidos
     }
     enviaPedido(ordemDoPedido)
     formarCard();
     fechaModal();
+    
 }
 
 async function formarCard(){
@@ -87,15 +88,15 @@ const phoneMask = (value) => {
     value = value.replace(/(\d)(\d{4})$/, "$1-$2")
     return value
 }
-
-function organizaPedidos(domDosPedidos){//percorre o dom dos inputs checkboxs e retorna somente os marcados
+function organizarPedidos(domDosPedidos){//percorre o dom dos inputs checkboxs e retorna somente os marcados
     const produtosMarcados = [];
     for(let pedido of domDosPedidos){
         if(pedido.checked){
             produtosMarcados.push(pedido.value)
         }
     }
-    return produtosMarcados;
+    return produtosMarcados
+    
 }
 function fechaModal(){
     const m = document.querySelector("#exampleModal");
