@@ -63,7 +63,7 @@ async function cadastrar(){
 async function formarCard(){
     const pedidos = await getPedidos();
     const cardContainer = document.querySelector("main#cardsContainer");
-    limparCampo(cardContainer);
+    limparCampo(cardContainer, "html");
 
     for(let pedido of pedidos){//percorre objeto por objeto e preenche o html
         cardContainer.innerHTML += `
@@ -122,6 +122,11 @@ function validarPedidos(pedidos){
         return listaDePedidosMarcados;
     }
 }
-function limparCampo(campo){
-    campo.innerHTML="";
+function limparCampo(campo, parametroASerLimpo=null){
+    if(parametroASerLimpo == "html"){
+        campo.innerHTML="";
+    }else{
+        campo.value = "";
+    }
+    
 }
