@@ -52,7 +52,7 @@ async function cadastrar(){
         limparCampo(telefone);
         limparCampo(rua);
         limparCampo(bairro);
-        limparCampo(numero)
+        limparCampo(numero);
         formarCard();
         fechaModal();
     }
@@ -63,13 +63,13 @@ async function cadastrar(){
 async function formarCard(){
     const pedidos = await getPedidos();
     const cardContainer = document.querySelector("main#cardsContainer");
-    cardContainer.innerHTML="";
+    limparCampo(cardContainer);
 
     for(let pedido of pedidos){//percorre objeto por objeto e preenche o html
         cardContainer.innerHTML += `
         <div class="card mt-4" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title" style="border-bottom: solid grey 1px">Pedido #${pedido.id}</h5>
+                <h5 class="card-title" style="border-bottom: solid grey 1px">Pedido #${pedido.id-1}</h5>
                 <p><span class="negrito">Nome do Destinatário: </span>${pedido.nomeDestinatario}</p>
                 <p class="card-text"><span class="negrito">Rua: </span>${pedido.rua}
                 <p><span class="negrito">Bairro: </span>${pedido.bairro}</p>
