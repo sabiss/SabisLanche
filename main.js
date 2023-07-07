@@ -14,7 +14,6 @@ async function enviaPedido(pedido){
           body: JSON.stringify(pedido)
         });
       } catch (error) {
-        alert("Ocorreu um erro")
         console.log(error)
       }
 }
@@ -28,32 +27,44 @@ async function cancelarPedido(id){
     }
     formarCard();
 }
-function cadastrar(){
-    const nomeDestinatario = document.querySelector('input#nome').value
-    const telefone = document.querySelector('input#telefone').value
-    const rua = document.querySelector('input#rua').value
-    const bairro = document.querySelector('input#bairro').value
-    const numero = document.querySelector('input#numero').value
+async function cadastrar(){
+    const nomeDestinatario = document.querySelector('input#nome')
+    const telefone = document.querySelector('input#telefone')
+    const rua = document.querySelector('input#rua')
+    const bairro = document.querySelector('input#bairro')
+    const numero = document.querySelector('input#numero')
     let pedidos = document.querySelectorAll('input[type="checkbox"]');
-    const listaDePedidos = organizarPedidos(pedidos);
+    const listaDePedidos = validarPedidos(pedidos);
 
-    const ordemDoPedido = {
-        "nomeDestinatario": nomeDestinatario,
-        "telefone": telefone,
-        "rua": rua,
-        "bairro":bairro,
-        "numero":numero,
-        "pedidos": listaDePedidos
+    if(listaDePedidos == false){//se não tiver pedidos marcados
+        alert("Marque pelo menos um pedido");
+    }else{//se tiver pedidos marcados
+        const ordemDoPedido = {
+            "nomeDestinatario": nomeDestinatario.value,
+            "telefone": telefone.value,
+            "rua": rua.value,
+            "bairro":bairro.value,
+            "numero":numero.value,
+            "pedidos": listaDePedidos
+        }
+        await enviaPedido(ordemDoPedido)
+        limparCampo(nomeDestinatario);
+        limparCampo(telefone);
+        limparCampo(rua);
+        limparCampo(bairro);
+        limparCampo(numero)
+        formarCard();
+        fechaModal();
     }
-    enviaPedido(ordemDoPedido)
-    formarCard();
-    fechaModal();
-    
+
+   
 }
 
 async function formarCard(){
     const pedidos = await getPedidos();
     const cardContainer = document.querySelector("main#cardsContainer");
+    cardContainer.innerHTML="";
+
     for(let pedido of pedidos){//percorre objeto por objeto e preenche o html
         cardContainer.innerHTML += `
         <div class="card mt-4" style="width: 18rem;">
@@ -102,4 +113,15 @@ function fechaModal(){
     const m = document.querySelector("#exampleModal");
     const modal = bootstrap.Modal.getInstance(m);
     modal.hide();
+}
+function validarPedidos(pedidos){
+    const listaDePedidosMarcados = organizarPedidos(pedidos);
+    if(listaDePedidosMarcados.length == 0){
+        return false;
+    }else{
+        return listaDePedidosMarcados;
+    }
+}
+function limparCampo(campo){
+    campo.innerHTML="";
 }
