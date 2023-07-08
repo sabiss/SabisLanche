@@ -14,7 +14,7 @@
         <div class="container-fluid">
           <a class="navbar-brand text-light">Sabis <span style="font-weight: bold;">Lanches</span> <img width="48" height="48" src="https://img.icons8.com/color-glass/48/cheeseburger.png" alt="cheeseburger"/></a><!--<a  href="https://icons8.com/icon/E3l2HAe3zEBV/x-burger">X-Burger</a> icon by <a href="https://icons8.com">Icons8</a>-->
           <form class="d-flex justify-content-around" role="search">
-            <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
+            <input class="form-control me-2" type="search" placeholder="Pesquise por nome" aria-label="Search" id="busca" onkeyup="buscarPedidos()">
             <button type="button" class="btn me-2 negrito" style="background-color: #e80c06;color: white;">Buscar</button>
             <button type="button" class="btn" style="border-radius: 50%; background-color: 
             #f5c924; color: white;" data-bs-toggle="modal" data-bs-target="#modalCadastro"><i class="bi bi-plus-lg"></i></button>
@@ -145,7 +145,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEdicao" onclick="editarPedido(event)">Editar</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEdicao" onclick="editarPedido()">Editar</button>
           </div>
         </div>
       </div>
