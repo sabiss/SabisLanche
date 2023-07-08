@@ -1,6 +1,6 @@
 const baseUrl = 'https://649a1d4a79fbe9bcf8404b5a.mockapi.io/users/20201214010012/products';
 formarCard();
-let idDoPedidoParaEditar;
+let idDoPedidoParaEditar;//variável global usada para auxiliar na função EDITARPEDIDO()
 
 async function getPedidos(){
     const response = await fetch(baseUrl);
@@ -120,8 +120,11 @@ async function cadastrar(){
     }
 }
 
-async function formarCard(){
-    const pedidos = await getPedidos();
+async function formarCard(cardsEspecificos = null){
+    let pedidos;
+
+    cardsEspecificos != null? pedidos = cardsEspecificos : pedidos = await getPedidos();//verifica se é pra exibir todos os cards ou outros em específico
+
     const cardContainer = document.querySelector("main#cardsContainer");
     limparCampo(cardContainer, "html");
 
@@ -146,6 +149,22 @@ async function formarCard(){
                 <button type="button" class="btn btn-success " onclick="recolocarValoresNosCampos(${pedido.id})" data-bs-toggle="modal" data-bs-target="#modalEdicao">Editar</button>
             </div>
       </div>`
+    }
+}
+async function buscarPedidos(){
+    console.log("digitando")
+    const barraDePesquisa = document.querySelector('input#busca');
+
+    try{
+        if(barraDePesquisa.value == ""){
+            formarCard()
+        }else{
+            const listaDePedidosNoSistema = await fetch(baseUrl + '/' + '?nomeDestinatario='+ barraDePesquisa.value);
+            const pedidos = await listaDePedidosNoSistema.json()
+            formarCard(pedidos)
+        }
+    }catch(error){
+        console.log("Erro ao buscar: " + error);
     }
 }
 //máscara para telefone
