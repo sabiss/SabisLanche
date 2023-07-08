@@ -3,9 +3,14 @@ formarCard();
 let idDoPedidoParaEditar;//variável global usada para auxiliar na função EDITARPEDIDO()
 
 async function getPedidos(){
-    const response = await fetch(baseUrl);
-    const dados = await response.json()
-    return dados;
+    try{
+        const response = await fetch(baseUrl);
+        const dados = await response.json()
+        return dados;
+    }catch(error){
+        alert("Erro ao solicitar lsita de pedidos no sistema: " + error)
+    }
+    
 }
 
 async function enviaPedido(pedido){
@@ -47,13 +52,17 @@ async function editarPedido(){
             "numero":numero.value,
             "pedidos": listaPedidos 
         }
-
-        const response = await fetch(baseUrl + "/" +idDoPedidoParaEditar, {
-            method: "PUT",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(novaOrdemDoPedido)
-        });
-        fechaModal("modalEdicao");
+        try{
+            const response = await fetch(baseUrl + "/" + idDoPedidoParaEditar, {
+                method: "PUT",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(novaOrdemDoPedido)
+            });
+            fechaModal("modalEdicao");
+        }catch(error){
+            alert(`Erro ao enviar edição de pedido: ${error}`)
+        }
+        
     }else{
         alert("Ocorreu um erro");
     }
@@ -62,31 +71,33 @@ async function editarPedido(){
 async function recolocarValoresNosCampos(id){
     let checkboxs = document.querySelectorAll('input[type="checkbox"].checkboxEdicao');
 
-    const listaDePedidosNoSistema = await getPedidos()
-    
-    const pedidoParaEditar = listaDePedidosNoSistema.filter(p => p.id == id)
+    try{
+        const listaDePedidosNoSistema = await getPedidos()
+        const pedidoParaEditar = listaDePedidosNoSistema.filter(p => p.id == id)
 
-    const pedidosDoCliente = pedidoParaEditar[0].pedidos
-    
-    const produtos = [];
-
-    for(let i = 0; i < checkboxs.length; i++){//marcando os checkboxs que estavam marcados no pedido
-        for(let e = 0; e < pedidosDoCliente.length; e++){
-            if(checkboxs[i].value == pedidosDoCliente[e]){
-                checkboxs[i].checked = true;
-                produtos.push(checkboxs[i].value)
-            }
-        }
+        const pedidosDoCliente = pedidoParaEditar[0].pedidos
         
-    }
-    //recolocando os valores do pedido nos campos inputs
-    const nomeDestinatario = document.querySelector('input#nomeEdicao').value = pedidoParaEditar[0].nomeDestinatario
-    const telefone = document.querySelector('input#telefoneEdicao').value = pedidoParaEditar[0].telefone
-    const rua = document.querySelector('input#ruaEdicao').value = pedidoParaEditar[0].rua
-    const bairro = document.querySelector('input#bairroEdicao').value = pedidoParaEditar[0].bairro
-    const numero = document.querySelector('input#numeroEdicao').value = pedidoParaEditar[0].numero
-    idDoPedidoParaEditar = pedidoParaEditar[0].id
+        const produtos = [];
 
+        for(let i = 0; i < checkboxs.length; i++){//marcando os checkboxs que estavam marcados no pedido
+            for(let e = 0; e < pedidosDoCliente.length; e++){
+                if(checkboxs[i].value == pedidosDoCliente[e]){
+                    checkboxs[i].checked = true;
+                    produtos.push(checkboxs[i].value)
+                }
+            }
+            
+        }
+        //recolocando os valores do pedido nos campos inputs
+        const nomeDestinatario = document.querySelector('input#nomeEdicao').value = pedidoParaEditar[0].nomeDestinatario
+        const telefone = document.querySelector('input#telefoneEdicao').value = pedidoParaEditar[0].telefone
+        const rua = document.querySelector('input#ruaEdicao').value = pedidoParaEditar[0].rua
+        const bairro = document.querySelector('input#bairroEdicao').value = pedidoParaEditar[0].bairro
+        const numero = document.querySelector('input#numeroEdicao').value = pedidoParaEditar[0].numero
+        idDoPedidoParaEditar = pedidoParaEditar[0].id
+    }catch(error){
+        console.log("erro na função [recolocarValoresNosCampos]: " + error)
+    }
 }
 async function cadastrar(){
     const nomeDestinatario = document.querySelector('input#nome')
@@ -108,7 +119,12 @@ async function cadastrar(){
             "numero":numero.value,
             "pedidos": listaDePedidos 
         }
-        await enviaPedido(ordemDoPedido)
+        try{
+            await enviaPedido(ordemDoPedido)
+        }catch(error){
+            alert("Erro ao cadastrar pedido:" + error)
+        }
+        
         limparCampo(nomeDestinatario, "value");
         limparCampo(telefone, "value");
         limparCampo(rua, "value");
@@ -122,7 +138,6 @@ async function cadastrar(){
 
 async function formarCard(cardsEspecificos = null){
     let pedidos;
-
     cardsEspecificos != null? pedidos = cardsEspecificos : pedidos = await getPedidos();//verifica se é pra exibir todos os cards ou outros em específico
 
     const cardContainer = document.querySelector("main#cardsContainer");
@@ -151,7 +166,7 @@ async function formarCard(cardsEspecificos = null){
       </div>`
     }
 }
-async function buscarPedidos(){
+async function buscarPedidos(){//a cada letra digitada ele busca no sistema se em algum card com aquela letra do nome do destinatário
     console.log("digitando")
     const barraDePesquisa = document.querySelector('input#busca');
 
