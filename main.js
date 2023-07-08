@@ -2,7 +2,7 @@ const baseUrl = 'https://649a1d4a79fbe9bcf8404b5a.mockapi.io/users/2020121401001
 formarCard();
 let idDoPedidoParaEditar;//variável global usada para auxiliar na função EDITARPEDIDO()
 
-async function getPedidos(){
+async function getPedidos(){//busca todos os pedidos salvos na api
     try{
         const response = await fetch(baseUrl);
         const dados = await response.json()
@@ -13,7 +13,7 @@ async function getPedidos(){
     
 }
 
-async function enviaPedido(pedido){
+async function enviaPedido(pedido){//envia os novos pedidos para a api
     try {
         await fetch(baseUrl, {
           method: "POST",
@@ -24,7 +24,7 @@ async function enviaPedido(pedido){
         console.log(error)
       }
 }
-async function concluirPedido(id){
+async function concluirPedido(id){//deleta um pedido em específico na api
     try {
         await fetch(baseUrl + "/" + id, { method: "DELETE" });
     }
@@ -41,7 +41,7 @@ async function editarPedido(){
     const numero = document.querySelector('input#numeroEdicao')
     const checkboxs = document.querySelectorAll('input[type="checkbox"].checkboxEdicao');
 
-    const listaPedidos = validarPedidos(checkboxs);
+    const listaPedidos = validarMarcacaoDosPedidos(checkboxs);
 
     if(listaPedidos != false){
         const novaOrdemDoPedido = {
@@ -73,11 +73,11 @@ async function recolocarValoresNosCampos(id){
 
     try{
         const listaDePedidosNoSistema = await getPedidos()
-        const pedidoParaEditar = listaDePedidosNoSistema.filter(p => p.id == id)
+        const pedidoParaEditar = listaDePedidosNoSistema.filter(p => p.id == id)//poem dentro da variável o pedido que possui o id igual ao do parâmetro da função
 
         const pedidosDoCliente = pedidoParaEditar[0].pedidos
         
-        const produtos = [];
+        const produtos = [];//aqui estarão todos os values dos checkboxs de produtos marcados
 
         for(let i = 0; i < checkboxs.length; i++){//marcando os checkboxs que estavam marcados no pedido
             for(let e = 0; e < pedidosDoCliente.length; e++){
@@ -106,7 +106,7 @@ async function cadastrar(){
     const bairro = document.querySelector('input#bairro')
     const numero = document.querySelector('input#numero')
     let pedidos = document.querySelectorAll('input[type="checkbox"]');
-    const listaDePedidos = validarPedidos(pedidos);
+    const listaDePedidos = validarMarcacaoDosPedidos(pedidos);
 
     if(listaDePedidos == false){//se não tiver pedidos marcados
         alert("Marque pelo menos um pedido");
@@ -136,7 +136,7 @@ async function cadastrar(){
     }
 }
 
-async function formarCard(cardsEspecificos = null){
+async function formarCard(cardsEspecificos = null){//percorre a lista de pedidos no sistema e forma o card html deles um por um
     let pedidos;
     cardsEspecificos != null? pedidos = cardsEspecificos : pedidos = await getPedidos();//verifica se é pra exibir todos os cards ou outros em específico
 
@@ -194,7 +194,7 @@ const phoneMask = (value) => {
     value = value.replace(/(\d)(\d{4})$/, "$1-$2")
     return value
 }
-function organizarPedidos(domDosPedidos){//percorre o dom dos inputs checkboxs e retorna somente os marcados
+function organizarPedidos(domDosPedidos){//percorre o dom dos inputs checkboxs e retorna somente os marcados como check
     const produtosMarcados = [];
     for(let pedido of domDosPedidos){
         if(pedido.checked){
@@ -204,7 +204,7 @@ function organizarPedidos(domDosPedidos){//percorre o dom dos inputs checkboxs e
     return produtosMarcados
     
 }
-function fechaModal(modalEspecifico){
+function fechaModal(modalEspecifico){//fecha os modais de formulários
     let m;
     switch(modalEspecifico){
         case "modalCadastro":
@@ -217,15 +217,15 @@ function fechaModal(modalEspecifico){
     const modal = bootstrap.Modal.getInstance(m);
     modal.hide();
 }
-function validarPedidos(pedidos){
-    const listaDePedidosMarcados = organizarPedidos(pedidos);
-    if(listaDePedidosMarcados.length == 0){
+function validarMarcacaoDosPedidos(pedidos){//verifica se há pedidos marcados
+    const listaDePedidosMarcados = organizarPedidos(pedidos);//pega os marcados
+    if(listaDePedidosMarcados.length == 0){//não tem marcados
         return false;
-    }else{
+    }else{//tem marcados
         return listaDePedidosMarcados;
     }
 }
-function limparCampo(campo, parametroASerLimpo=null){
+function limparCampo(campo, parametroASerLimpo=null){//limpa o innerhtml de divs ou o values de inputs 
     switch(parametroASerLimpo){
         case "html":
             campo.innerHTML="";
