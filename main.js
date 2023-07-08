@@ -1,5 +1,7 @@
 const baseUrl = 'https://649a1d4a79fbe9bcf8404b5a.mockapi.io/users/20201214010012/products';
 formarCard();
+let idDoPedidoParaEditar;
+
 async function getPedidos(){
     const response = await fetch(baseUrl);
     const dados = await response.json()
@@ -17,15 +19,74 @@ async function enviaPedido(pedido){
         console.log(error)
       }
 }
-async function cancelarPedido(id){
+async function concluirPedido(id){
     try {
-        console.log(baseUrl+"/"+id)
         await fetch(baseUrl + "/" + id, { method: "DELETE" });
     }
     catch(error){
         console.log("Vixi, Deu erro: " + error);
     }
     formarCard();
+}
+async function editarPedido(){
+    const nomeDestinatario = document.querySelector('input#nomeEdicao')
+    const telefone = document.querySelector('input#telefoneEdicao')
+    const rua = document.querySelector('input#ruaEdicao')
+    const bairro = document.querySelector('input#bairroEdicao')
+    const numero = document.querySelector('input#numeroEdicao')
+    const checkboxs = document.querySelectorAll('input[type="checkbox"].checkboxEdicao');
+
+    const listaPedidos = validarPedidos(checkboxs);
+
+    if(listaPedidos != false){
+        const novaOrdemDoPedido = {
+            "nomeDestinatario": nomeDestinatario.value,
+            "telefone": telefone.value,
+            "rua": rua.value,
+            "bairro":bairro.value,
+            "numero":numero.value,
+            "pedidos": listaPedidos 
+        }
+
+        const response = await fetch(baseUrl + "/" +idDoPedidoParaEditar, {
+            method: "PUT",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(novaOrdemDoPedido)
+        });
+        fechaModal("modalEdicao");
+    }else{
+        alert("Ocorreu um erro");
+    }
+    formarCard()
+}
+async function recolocarValoresNosCampos(id){
+    let checkboxs = document.querySelectorAll('input[type="checkbox"].checkboxEdicao');
+
+    const listaDePedidosNoSistema = await getPedidos()
+    
+    const pedidoParaEditar = listaDePedidosNoSistema.filter(p => p.id == id)
+
+    const pedidosDoCliente = pedidoParaEditar[0].pedidos
+    
+    const produtos = [];
+
+    for(let i = 0; i < checkboxs.length; i++){//marcando os checkboxs que estavam marcados no pedido
+        for(let e = 0; e < pedidosDoCliente.length; e++){
+            if(checkboxs[i].value == pedidosDoCliente[e]){
+                checkboxs[i].checked = true;
+                produtos.push(checkboxs[i].value)
+            }
+        }
+        
+    }
+    //recolocando os valores do pedido nos campos inputs
+    const nomeDestinatario = document.querySelector('input#nomeEdicao').value = pedidoParaEditar[0].nomeDestinatario
+    const telefone = document.querySelector('input#telefoneEdicao').value = pedidoParaEditar[0].telefone
+    const rua = document.querySelector('input#ruaEdicao').value = pedidoParaEditar[0].rua
+    const bairro = document.querySelector('input#bairroEdicao').value = pedidoParaEditar[0].bairro
+    const numero = document.querySelector('input#numeroEdicao').value = pedidoParaEditar[0].numero
+    idDoPedidoParaEditar = pedidoParaEditar[0].id
+
 }
 async function cadastrar(){
     const nomeDestinatario = document.querySelector('input#nome')
@@ -45,19 +106,18 @@ async function cadastrar(){
             "rua": rua.value,
             "bairro":bairro.value,
             "numero":numero.value,
-            "pedidos": listaDePedidos
+            "pedidos": listaDePedidos 
         }
         await enviaPedido(ordemDoPedido)
-        limparCampo(nomeDestinatario);
-        limparCampo(telefone);
-        limparCampo(rua);
-        limparCampo(bairro);
-        limparCampo(numero);
+        limparCampo(nomeDestinatario, "value");
+        limparCampo(telefone, "value");
+        limparCampo(rua, "value");
+        limparCampo(bairro, "value");
+        limparCampo(numero, "value");
+        limparCampo(pedidos, "checkbox")
         formarCard();
-        fechaModal();
+        fechaModal("modalCadastro");
     }
-
-   
 }
 
 async function formarCard(){
@@ -82,12 +142,13 @@ async function formarCard(){
                 ${pedido.pedidos[3]?`<li class="list-group-item">${pedido.pedidos[3]}</li>`:''}
             </ul>
             <div class="card-body d-flex flex-column ">
-                <button type="button" class="btn btn-danger mb-2" onclick="cancelarPedido(${pedido.id})">Cancelar Pedido</button>
-                <button type="button" class="btn btn-success"${pedido.id}>Pedido Concluído</button>
+                <button type="button" class="btn btn-primary mb-2" onclick="concluirPedido(${pedido.id})">Concluir ou Cancelar</button>
+                <button type="button" class="btn btn-success " onclick="recolocarValoresNosCampos(${pedido.id})" data-bs-toggle="modal" data-bs-target="#modalEdicao">Editar</button>
             </div>
       </div>`
     }
 }
+//máscara para telefone
 const handlePhone = (event) => {
     let input = event.target
     input.value = phoneMask(input.value)
@@ -109,8 +170,16 @@ function organizarPedidos(domDosPedidos){//percorre o dom dos inputs checkboxs e
     return produtosMarcados
     
 }
-function fechaModal(){
-    const m = document.querySelector("#exampleModal");
+function fechaModal(modalEspecifico){
+    let m;
+    switch(modalEspecifico){
+        case "modalCadastro":
+            m = document.querySelector("#modalCadastro");
+            break;
+        case "modalEdicao":
+            m = document.querySelector("#modalEdicao");
+            break
+    }
     const modal = bootstrap.Modal.getInstance(m);
     modal.hide();
 }
@@ -123,8 +192,21 @@ function validarPedidos(pedidos){
     }
 }
 function limparCampo(campo, parametroASerLimpo=null){
+    switch(parametroASerLimpo){
+        case "html":
+            campo.innerHTML="";
+            break;
+        case "value":
+            campo.value = "";
+            break;
+        case "checkbox":
+            for(let box of campo){
+                box.checked.false;
+            }
+            break;
+    }
     if(parametroASerLimpo == "html"){
-        campo.innerHTML="";
+        
     }else{
         campo.value = "";
     }
