@@ -240,14 +240,9 @@ function limparCampo(campo, parametroASerLimpo=null){//limpa o innerhtml de divs
             break;
         case "checkbox":
             for(let box of campo){
-                box.checked.false;
+                box.checked =false;
             }
             break;
-    }
-    if(parametroASerLimpo == "html"){
-        
-    }else{
-        campo.value = "";
     }
     
 }
