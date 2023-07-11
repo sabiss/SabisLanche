@@ -8,6 +8,7 @@ body{
 .fastFood{
   background: url(pexels-valeria-boltneva-1639557.jpg) center /cover no-repeat ;
 }
-.pedidoConcluido{
-  background-color: grey;
+.preco{
+  font-weight: bold;
+  color: green;
 }
