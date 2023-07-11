@@ -156,7 +156,7 @@ async function formarCard(cardsEspecificos = null){//percorre a lista de pedidos
                 <p class="card-text"><span class="negrito">Rua: </span>${pedido.rua}
                 <p><span class="negrito">Bairro: </span>${pedido.bairro}</p>
                 <p><span class="negrito">Número: </span>${pedido.numero}</p>
-                <p><span class="negrito">Preço Total: </span>${pedido.preco}</p>
+                <p><span class="negrito preco">Preço Total: R$ </span><span class="negrito">${pedido.preco},00</span></p>
             </div>
             <ul class="list-group list-group-flush">
                 ${pedido.pedidos[0]?`<li class="list-group-item">${pedido.pedidos[0]}</li>`:''}
