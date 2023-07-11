@@ -12,3 +12,9 @@ body{
   font-weight: bold;
   color: green;
 }
+.centralizando{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0;
+}
