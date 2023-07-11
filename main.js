@@ -109,6 +109,7 @@ async function cadastrar(){
     const numero = document.querySelector('input#numero')
     let pedidos = document.querySelectorAll('input[type="checkbox"]');
     const listaDePedidos = validarMarcacaoDosPedidos(pedidos);
+    const precoTotal = calcularPrecoTotal(listaDePedidos)
 
     if(listaDePedidos == false){//se não tiver pedidos marcados
         alert("Marque pelo menos um pedido");
@@ -119,7 +120,8 @@ async function cadastrar(){
             "rua": rua.value,
             "bairro":bairro.value,
             "numero":numero.value,
-            "pedidos": listaDePedidos 
+            "pedidos": listaDePedidos,
+            "preco": precoTotal
         }
         try{
             await enviaPedido(ordemDoPedido)
@@ -154,6 +156,7 @@ async function formarCard(cardsEspecificos = null){//percorre a lista de pedidos
                 <p class="card-text"><span class="negrito">Rua: </span>${pedido.rua}
                 <p><span class="negrito">Bairro: </span>${pedido.bairro}</p>
                 <p><span class="negrito">Número: </span>${pedido.numero}</p>
+                <p><span class="negrito">Preço Total: </span>${pedido.preco}</p>
             </div>
             <ul class="list-group list-group-flush">
                 ${pedido.pedidos[0]?`<li class="list-group-item">${pedido.pedidos[0]}</li>`:''}
@@ -248,3 +251,16 @@ function limparCampo(campo, parametroASerLimpo=null){//limpa o innerhtml de divs
     }
     
 }
+function calcularPrecoTotal(produtosComprados){//vê quais produtos foram comprados, quais seus preços, soma tudo e retorna
+    let precoTotal = 0;
+
+    for(produtoVendido of produtosComprados){
+        for(produtoNoCardapio of cardapio){
+            if(produtoVendido == produtoNoCardapio.produto){
+                precoTotal+=produtoNoCardapio.preco;
+            }
+        }
+    }
+    return precoTotal;
+}
+    
