@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Login Form</title>
+  </head>
+  <body>
+    <div class="overlay" id="aviso">
+      <div class="aviso-content">
+        <p>
+          Bem-vindo ao Delivery! Caso já tenha conta, digite seus dados e aperte
+          em <strong>Login</strong>, caso não, digite seus dados e aperte em
+          <strong>Cadastrar-se</strong> Boa Experiência!
+        </p>
+        <button class="close-btn" onclick="fecharAviso()">Fechar</button>
+      </div>
+    </div>
+    <div class="container">
+      <div>
+        <h2>Login</h2>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required />
+
+        <button onclick="logar()">Login</button>
+        <button onclick="cadastrar()">Cadastrar-se</button>
+      </div>
+    </div>
+  </body>
+  <script src="./main.js"></script>
+</html>
