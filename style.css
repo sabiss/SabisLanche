@@ -6,7 +6,8 @@ body {
   font-weight: bold;
 }
 .fastFood {
-  background: url(pexels-valeria-boltneva-1639557.jpg) center / cover no-repeat;
+  background: url(./assets/pexels-valeria-boltneva-1639557.jpg) center / cover
+    no-repeat;
 }
 .preco {
   font-weight: bold;
