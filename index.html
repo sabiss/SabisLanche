@@ -1,158 +1,308 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sistema Delivery - SabisLanche</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
-    <link rel="icon" href="https://img.icons8.com/color-glass/48/cheeseburger.png">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="style.css" rel="stylesheet" />
+    <link
+      rel="icon"
+      href="https://img.icons8.com/color-glass/48/cheeseburger.png"
+    />
   </head>
   <body class="fastFood">
     <header>
       <nav class="navbar">
         <div class="container-fluid">
-          <a class="navbar-brand text-light">Sabis <span style="font-weight: bold;">Lanches</span> <img width="48" height="48" src="https://img.icons8.com/color-glass/48/cheeseburger.png" alt="cheeseburger"/></a><!--<a  href="https://icons8.com/icon/E3l2HAe3zEBV/x-burger">X-Burger</a> icon by <a href="https://icons8.com">Icons8</a>-->
+          <a class="navbar-brand text-light"
+            >Sabis <span style="font-weight: bold">Lanches</span>
+            <img
+              width="48"
+              height="48"
+              src="https://img.icons8.com/color-glass/48/cheeseburger.png"
+              alt="cheeseburger" /></a
+          ><!--<a  href="https://icons8.com/icon/E3l2HAe3zEBV/x-burger">X-Burger</a> icon by <a href="https://icons8.com">Icons8</a>-->
           <form class="d-flex justify-content-around" role="search">
-            <input class="form-control me-2" type="search" placeholder="Pesquise por nome" aria-label="Search" id="busca" onkeyup="buscarPedidos()">
-            <button type="button" class="btn me-2 negrito" style="background-color: #e80c06;color: white;">Buscar</button>
-            <button type="button" class="btn" style="border-radius: 50%; background-color: 
-            #f5c924; color: white;" data-bs-toggle="modal" data-bs-target="#modalCadastro"><i class="bi bi-plus-lg"></i></button>
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Pesquise por nome"
+              aria-label="Search"
+              id="busca"
+              onkeyup="buscarPedidos()"
+            />
+            <button
+              type="button"
+              class="btn me-2 negrito"
+              style="background-color: #e80c06; color: white"
+            >
+              Buscar
+            </button>
+            <button
+              type="button"
+              class="btn"
+              style="
+                border-radius: 50%;
+                background-color: #f5c924;
+                color: white;
+              "
+              data-bs-toggle="modal"
+              data-bs-target="#modalCadastro"
+            >
+              <i class="bi bi-plus-lg"></i>
+            </button>
           </form>
         </div>
-    </nav>
+      </nav>
     </header>
-    <main class="d-flex justify-content-around p-3 align-items-center flex-wrap" id="cardsContainer"></main><!--Div dos cards-->
+    <main
+      class="d-flex justify-content-around p-3 align-items-center flex-wrap"
+      id="cardsContainer"
+    ></main>
+    <!--Div dos cards-->
     <!-- Modal Para cadastro -->
-    <div class="modal fade" id="modalCadastro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="cardsContainer">
+    <div
+      class="modal fade"
+      id="modalCadastro"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+      id="cardsContainer"
+    >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Informe as informações para cadastro</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Informe as informações para cadastro
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <div class="mb-3">
               <label for="nome" class="form-label">Nome do destinatário</label>
-              <input type="text" class="form-control" id="nome">
+              <input type="text" class="form-control" id="nome" />
             </div>
             <div class="mb-3">
               <label for="telefone" class="form-label">Telefone</label>
-              <input type="tel" class="form-control" id="telefone" onkeyup="handlePhone(event)">
+              <input
+                type="tel"
+                class="form-control"
+                id="telefone"
+                onkeyup="handlePhone(event)"
+              />
             </div>
-            <div class="modal-header" style="border-top: 1px solid rgb(202, 202, 202)">
+            <div
+              class="modal-header"
+              style="border-top: 1px solid rgb(202, 202, 202)"
+            >
               <h1 class="modal-title fs-5" id="exampleModalLabel">Endereço</h1>
             </div>
             <div class="mb-3">
               <label for="rua" class="form-label">Rua</label>
-              <input type="text" class="form-control" id="rua">
+              <input type="text" class="form-control" id="rua" />
             </div>
             <div class="mb-3">
               <label for="numero" class="form-label">Número</label>
-              <input type="number" class="form-control" id="numero">
+              <input type="number" class="form-control" id="numero" />
             </div>
             <div class="mb-3">
               <label for="bairro" class="form-label">Bairro</label>
-              <input type="text" class="form-control" id="bairro">
+              <input type="text" class="form-control" id="bairro" />
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Hamburguer" id="Hamburguer" name="">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="Hamburguer"
+                id="Hamburguer"
+                name=""
+              />
               <label class="form-check-label" for="Hamburguer">
                 Hamburguer <span class="preco">R$ 15,00</span>
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Milkshake" id="Milshake">
-              <label class="form-check-label" for="Milshake">
-                Milshake <span class="preco">R$ 10,00</span>
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="Milkshake"
+                id="Milkshake"
+              />
+              <label class="form-check-label" for="Milkshake">
+                Milkshake <span class="preco">R$ 10,00</span>
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Batata Frita" id="Batata_frita">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="Batata Frita"
+                id="Batata_frita"
+              />
               <label class="form-check-label" for="Batata_frita">
                 Batata Frita <span class="preco">R$ 9,00</span>
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Refrigerante" id="Refrigerante">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="Refrigerante"
+                id="Refrigerante"
+              />
               <label class="form-check-label" for="c3">
                 Refrigerante <span class="preco">R$ 7,00</span>
               </label>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" onclick="cadastrar()">Adicionar</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-primary" onclick="cadastrar()">
+              Adicionar
+            </button>
           </div>
         </div>
       </div>
     </div>
     <!--Modal para edicao-->
-    <div class="modal fade" id="modalEdicao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="cardsContainer">
+    <div
+      class="modal fade"
+      id="modalEdicao"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+      id="cardsContainer"
+    >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Altere as informações que achar necessário</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Altere as informações que achar necessário
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <div class="mb-3">
               <label for="nome" class="form-label">Nome do destinatário</label>
-              <input type="text" class="form-control" id="nomeEdicao">
+              <input type="text" class="form-control" id="nomeEdicao" />
             </div>
             <div class="mb-3">
               <label for="telefone" class="form-label">Telefone</label>
-              <input type="tel" class="form-control" id="telefoneEdicao" onkeyup="handlePhone(event)">
+              <input
+                type="tel"
+                class="form-control"
+                id="telefoneEdicao"
+                onkeyup="handlePhone(event)"
+              />
             </div>
-            <div class="modal-header" style="border-top: 1px solid rgb(202, 202, 202)">
+            <div
+              class="modal-header"
+              style="border-top: 1px solid rgb(202, 202, 202)"
+            >
               <h1 class="modal-title fs-5" id="exampleModalLabel">Endereço</h1>
             </div>
             <div class="mb-3">
               <label for="rua" class="form-label">Rua</label>
-              <input type="text" class="form-control" id="ruaEdicao">
+              <input type="text" class="form-control" id="ruaEdicao" />
             </div>
             <div class="mb-3">
               <label for="numero" class="form-label">Número</label>
-              <input type="number" class="form-control" id="numeroEdicao">
+              <input type="number" class="form-control" id="numeroEdicao" />
             </div>
             <div class="mb-3">
               <label for="bairro" class="form-label">Bairro</label>
-              <input type="text" class="form-control" id="bairroEdicao">
+              <input type="text" class="form-control" id="bairroEdicao" />
             </div>
             <div class="form-check">
-              <input class="form-check-input checkboxEdicao" type="checkbox" value="Hamburguer" id="Hamburguer" name="">
-              <label class="form-check-label" for="c0">
-                Hamburguer
-              </label>
+              <input
+                class="form-check-input checkboxEdicao"
+                type="checkbox"
+                value="Hamburguer"
+                id="Hamburguer"
+                name=""
+              />
+              <label class="form-check-label" for="c0"> Hamburguer </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input checkboxEdicao" type="checkbox" value="Milshake" id="Milshake">
-              <label class="form-check-label" for="c1">
-                Milshake
-              </label>
+              <input
+                class="form-check-input checkboxEdicao"
+                type="checkbox"
+                value="Milkshake"
+                id="Milkshake"
+              />
+              <label class="form-check-label" for="c1"> Milkshake </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input checkboxEdicao" type="checkbox" value="Batata Frita" id="Batata_frita">
-              <label class="form-check-label" for="c2">
-                Batata Frita
-              </label>
+              <input
+                class="form-check-input checkboxEdicao"
+                type="checkbox"
+                value="Batata Frita"
+                id="Batata_frita"
+              />
+              <label class="form-check-label" for="c2"> Batata Frita </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input checkboxEdicao" type="checkbox" value="Refrigerante" id="Refrigerante">
-              <label class="form-check-label" for="c3">
-                Refrigerante
-              </label>
+              <input
+                class="form-check-input checkboxEdicao"
+                type="checkbox"
+                value="Refrigerante"
+                id="Refrigerante"
+              />
+              <label class="form-check-label" for="c3"> Refrigerante </label>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEdicao" onclick="editarPedido()">Editar</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#modalEdicao"
+              onclick="editarPedido()"
+            >
+              Editar
+            </button>
           </div>
         </div>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
     <script src="main.js"></script>
   </body>
 </html>
