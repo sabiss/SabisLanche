@@ -9,13 +9,22 @@ body {
   background: url(../assets/pexels-valeria-boltneva-1639557.jpg) center / cover
     no-repeat;
 }
-.preco {
-  font-weight: bold;
-  color: green;
+.cardComanda {
+  padding: 20px;
+  min-height: 400px;
+  width: 300px;
+  display: grid;
+  grid-template-rows: 0.5fr 3fr 1fr;
+  background-color: white;
+  border-radius: 10px;
 }
-.centralizando {
+.titulo,
+.botoes {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  padding: 0;
+}
+.botoes {
+  width: 100%;
+  flex-direction: column;
 }

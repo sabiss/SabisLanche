@@ -83,7 +83,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">
-              Informe as informações para cadastro
+              Faça Seu Pedido
             </h1>
             <button
               type="button"
@@ -93,37 +93,6 @@
             ></button>
           </div>
           <div class="modal-body">
-            <div class="mb-3">
-              <label for="nome" class="form-label">Nome do destinatário</label>
-              <input type="text" class="form-control" id="nome" />
-            </div>
-            <div class="mb-3">
-              <label for="telefone" class="form-label">Telefone</label>
-              <input
-                type="tel"
-                class="form-control"
-                id="telefone"
-                onkeyup="handlePhone(event)"
-              />
-            </div>
-            <div
-              class="modal-header"
-              style="border-top: 1px solid rgb(202, 202, 202)"
-            >
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Endereço</h1>
-            </div>
-            <div class="mb-3">
-              <label for="rua" class="form-label">Rua</label>
-              <input type="text" class="form-control" id="rua" />
-            </div>
-            <div class="mb-3">
-              <label for="numero" class="form-label">Número</label>
-              <input type="number" class="form-control" id="numero" />
-            </div>
-            <div class="mb-3">
-              <label for="bairro" class="form-label">Bairro</label>
-              <input type="text" class="form-control" id="bairro" />
-            </div>
             <div class="form-check">
               <input
                 class="form-check-input"
@@ -168,6 +137,16 @@
               <label class="form-check-label" for="c3">
                 Refrigerante <span class="preco">R$ 7,00</span>
               </label>
+            </div>
+            <div class="mb-3 mt-3">
+              <label for="exampleFormControlTextarea1" class="form-label"
+                >Obserções sobre o preparo do pedido</label
+              >
+              <textarea
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="3"
+              ></textarea>
             </div>
           </div>
           <div class="modal-footer">
