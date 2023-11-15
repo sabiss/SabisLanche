@@ -1,0 +1,21 @@
+body {
+  min-height: 100vh;
+  box-shadow: inset 0 0 0 1900px rgba(0, 0, 0, 0.4);
+}
+.negrito {
+  font-weight: bold;
+}
+.fastFood {
+  background: url(../assets/pexels-valeria-boltneva-1639557.jpg) center / cover
+    no-repeat;
+}
+.preco {
+  font-weight: bold;
+  color: green;
+}
+.centralizando {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0;
+}
