@@ -18,8 +18,11 @@ async function enviar(acao) {
         body: JSON.stringify(dados),
       });
       const retornoApi = await respostaLogin.json();
+      console.log(retornoApi);
       if (retornoApi.login === true) {
-        localStorage.setItem(retornoApi.token, "token");
+        const token = retornoApi.token;
+        localStorage.setItem("token", token);
+
         window.location.href = "./menu/index.html";
       } else {
         mostrarMessage(retornoApi.message);
