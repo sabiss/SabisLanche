@@ -1,11 +1,19 @@
-const baseUrl = "http://localhost:3000";
+const baseUrl =
+  "https://649a1d4a79fbe9bcf8404b5a.mockapi.io/users/20201214010012/products";
 formarCard();
 let idDoPedidoParaEditar; //variável global usada para auxiliar na função EDITARPEDIDO()
+
+cardapio = [
+  { produto: "Hamburguer", preco: 15 },
+  { produto: "Milkshake", preco: 10 },
+  { produto: "Batata Frita", preco: 9 },
+  { produto: "Refrigerante", preco: 7 },
+];
 
 async function getPedidos() {
   //busca todos os pedidos salvos na api
   try {
-    const response = await fetch(`${baseUrl}/pedidos`);
+    const response = await fetch(baseUrl);
     const dados = await response.json();
     return dados;
   } catch (error) {
