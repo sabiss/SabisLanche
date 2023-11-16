@@ -2,7 +2,6 @@ const baseUrl = "http://localhost:3000";
 window.addEventListener("load", paginaCarregou);
 
 function paginaCarregou() {
-  console.log("A página foi carregada!");
   formarCard();
 }
 function getPayload() {
@@ -14,23 +13,20 @@ async function getPedidos() {
   const payload = getPayload();
   const idUsuario = payload.id;
   try {
-    const retornoApi = await fetch(
-      `http://localhost:3000/pedidos/${idUsuario}`,
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        mode: "cors",
-      }
-    );
+    const retornoApi = await fetch(`${baseUrl}/pedidos/${idUsuario}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+    });
 
-    const pedidos = await retornoApi.json(); //{preco, [array com os pedidos]}
-    console.log(pedidos);
+    const pedidos = await retornoApi.json();
     return pedidos;
   } catch (error) {
     mostrarMessage(error.message);
   }
 }
 async function formarCard() {
+  showLoader();
   const pedidos = await getPedidos();
   const cardContainer = document.querySelector("main#cardsContainer");
   if (pedidos.pedidos == false) {
@@ -73,6 +69,7 @@ async function formarCard() {
         </div>`;
     }
   }
+  hideLoader();
 }
 function verificarRadioSelecionado() {
   // Obtém todos os elementos de input do tipo radio dentro da div mãe
@@ -88,7 +85,7 @@ function verificarRadioSelecionado() {
 }
 async function deletarPedido(id) {
   try {
-    await fetch(`http://localhost:3000/deletarPedido/${id}`, {
+    await fetch(`${baseUrl}/deletarPedido/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
@@ -129,7 +126,14 @@ function logout() {
   localStorage.clear();
   window.location.href = "../index.html";
 }
-
+function showLoader() {
+  const loader = document.getElementById("loader");
+  loader.style.display = "block";
+}
+function hideLoader() {
+  const loader = document.getElementById("loader");
+  loader.style.display = "none";
+}
 function mostrarMessage(message) {
   const card = document.getElementById("alerta");
   const texto = document.getElementById("alert-text");
