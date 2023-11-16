@@ -61,6 +61,14 @@
             >
               <i class="bi bi-plus-lg"></i>
             </button>
+            <button
+              type="button"
+              class="btn negrito"
+              style="background-color: #2626e1; color: white; margin-left: 10px"
+              onclick="logout()"
+            >
+              Sair
+            </button>
           </form>
         </div>
       </nav>
@@ -96,10 +104,10 @@
             <div class="form-check">
               <input
                 class="form-check-input"
-                type="checkbox"
-                value="Hamburguer"
+                type="radio"
+                value="1"
                 id="Hamburguer"
-                name=""
+                name="produto"
               />
               <label class="form-check-label" for="Hamburguer">
                 Hamburguer <span class="preco">R$ 15,00</span>
@@ -108,9 +116,10 @@
             <div class="form-check">
               <input
                 class="form-check-input"
-                type="checkbox"
-                value="Milkshake"
+                type="radio"
+                value="3"
                 id="Milkshake"
+                name="produto"
               />
               <label class="form-check-label" for="Milkshake">
                 Milkshake <span class="preco">R$ 10,00</span>
@@ -119,9 +128,10 @@
             <div class="form-check">
               <input
                 class="form-check-input"
-                type="checkbox"
-                value="Batata Frita"
-                id="Batata_frita"
+                type="radio"
+                value="2"
+                id="batataFrita"
+                name="produto"
               />
               <label class="form-check-label" for="Batata_frita">
                 Batata Frita <span class="preco">R$ 9,00</span>
@@ -130,12 +140,25 @@
             <div class="form-check">
               <input
                 class="form-check-input"
-                type="checkbox"
-                value="Refrigerante"
-                id="Refrigerante"
+                type="radio"
+                value="5"
+                id="refrigerante"
+                name="produto"
               />
               <label class="form-check-label" for="c3">
                 Refrigerante <span class="preco">R$ 7,00</span>
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="4"
+                id="hotDog"
+                name="produto"
+              />
+              <label class="form-check-label" for="c3">
+                Hot Dog <span class="preco">R$ 6,50</span>
               </label>
             </div>
             <div class="mb-3 mt-3">
@@ -144,7 +167,7 @@
               >
               <textarea
                 class="form-control"
-                id="exampleFormControlTextarea1"
+                id="observacaoCadastroPedido"
                 rows="3"
               ></textarea>
             </div>
@@ -157,7 +180,11 @@
             >
               Cancelar
             </button>
-            <button type="button" class="btn btn-primary" onclick="cadastrar()">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="fazerPedido()"
+            >
               Adicionar
             </button>
           </div>
@@ -274,6 +301,14 @@
               Editar
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="alerta" id="alerta">
+      <div class="card-container">
+        <div id="alert-text">Alerta!</div>
+        <div class="loading-bar">
+          <div class="progress-bar"></div>
         </div>
       </div>
     </div>
