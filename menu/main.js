@@ -5,10 +5,13 @@ function paginaCarregou() {
   console.log("A página foi carregada!");
   formarCard();
 }
-
-async function getPedidos() {
+function getPayload() {
   const token = localStorage.getItem("token");
   const payload = JSON.parse(atob(token.split(".")[1]));
+  return payload;
+}
+async function getPedidos() {
+  const payload = getPayload();
   const idUsuario = payload.id;
   try {
     const retornoApi = await fetch(
@@ -21,9 +24,10 @@ async function getPedidos() {
     );
 
     const pedidos = await retornoApi.json(); //{preco, [array com os pedidos]}
+    console.log(pedidos);
     return pedidos;
   } catch (error) {
-    alert(error.message);
+    mostrarMessage(error.message);
   }
 }
 async function formarCard() {
@@ -34,21 +38,26 @@ async function formarCard() {
       '<div class="card d-flex justify-content-center align-items-center" style="width: 18rem"><p>Sem Pedidos</p></div>';
   } else {
     cardContainer.innerHTML = "";
-    cardContainer.innerHTML += `
+    for (let pedido of pedidos) {
+      cardContainer.innerHTML += `
       <div class="card mt-4" style="width: 18rem">
           <div class="card-body">
-            <h5 class="negrito">Pedido #${pedidos.id}</h5>
+            <h5 class="negrito">Pedido #${pedido.id}</h5>
           </div>
           <ul class="list-group list-group-flush listaPedidos">
+            <li class="list-group-item">${pedido.nome}</li>
           </ul>
           <div class="card-body d-flex flex-column observacoes">
             <h5 class="negrito">Observaçoes:</h5>
-            <p>${pedidos.observacao}</p>
+            <p>${pedido.observacao}</p>
+          </div>
+          <div class="card-body d-flex flex-column">
+            <h6 class="negrito preco">Preço: R$${pedido.preco},00</h6>
           </div>
           <div class="card-body d-flex flex-column">
             <button
               type="button"
-              class="btn btn-primary mb-2" onclick="deletarPedido(${pedidos.id})"
+              class="btn btn-primary mb-2" onclick="deletarPedido(${pedido.id})"
             >
               Concluir ou Cancelar
             </button>
@@ -62,14 +71,21 @@ async function formarCard() {
             </button>
           </div>
         </div>`;
-
-    const listaProdutos = document.querySelector("ul.listaPedidos");
-    for (let produto of pedidos.produtos) {
-      listaProdutos.innerHTML += `<li class="list-group-item">${produto}</li>`;
     }
   }
 }
+function verificarRadioSelecionado() {
+  // Obtém todos os elementos de input do tipo radio dentro da div mãe
+  const radios = document.querySelectorAll('.modal-body input[type="radio"]');
 
+  // Percorre os radios para encontrar o selecionado
+  for (const radio of radios) {
+    if (radio.checked) {
+      // O radio está marcado, faça algo com ele
+      return radio.value;
+    }
+  }
+}
 async function deletarPedido(id) {
   try {
     await fetch(`http://localhost:3000/deletarPedido/${id}`, {
@@ -80,6 +96,51 @@ async function deletarPedido(id) {
   } catch (error) {
     alert(error.message);
   }
-
   formarCard();
+}
+async function fazerPedido() {
+  const idProduto = verificarRadioSelecionado();
+  const payload = await getPayload();
+  const idUsuario = payload.id;
+  const observacao = document.querySelector(
+    "textarea#observacaoCadastroPedido"
+  ).value;
+
+  try {
+    const retornoApi = await fetch(`${baseUrl}/fazerPedido`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        idUsuario: idUsuario,
+        idProduto: idProduto,
+        observacao: observacao,
+      }),
+    });
+    const message = await retornoApi.json();
+    mostrarMessage(message.message);
+    await formarCard();
+  } catch (error) {
+    mostrarMessage(error.message);
+  }
+}
+function logout() {
+  localStorage.clear();
+  window.location.href = "../index.html";
+}
+
+function mostrarMessage(message) {
+  const card = document.getElementById("alerta");
+  const texto = document.getElementById("alert-text");
+
+  texto.innerHTML = message;
+  card.style.display = "flex";
+
+  setTimeout(() => {
+    card.style.display = "none";
+  }, 5000);
+}
+function fecharAviso() {
+  document.getElementById("aviso").style.display = "none";
 }
