@@ -11,21 +11,24 @@ async function enviar(acao) {
 
   switch (acao) {
     case "logar":
-      const respostaLogin = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        mode: "cors",
-        body: JSON.stringify(dados),
-      });
-      const retornoApi = await respostaLogin.json();
-      console.log(retornoApi);
-      if (retornoApi.login === true) {
-        const token = retornoApi.token;
-        localStorage.setItem("token", token);
+      try {
+        const respostaLogin = await fetch("http://localhost:3000/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          mode: "cors",
+          body: JSON.stringify(dados),
+        });
+        const retornoApi = await respostaLogin.json();
+        if (retornoApi.login === true) {
+          const token = retornoApi.token;
+          localStorage.setItem("token", token);
 
-        window.location.href = "./menu/index.html";
-      } else {
-        mostrarMessage(retornoApi.message);
+          window.location.href = "./menu/index.html";
+        } else {
+          mostrarMessage(retornoApi.message);
+        }
+      } catch (error) {
+        mostrarMessage(error.message);
       }
       break;
     case "cadastrar":
