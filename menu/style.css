@@ -31,9 +31,6 @@ body {
   width: 100%;
   flex-direction: column;
 }
-form {
-  min-width: 400px;
-}
 .alerta {
   position: fixed;
   top: 0;
