@@ -2,12 +2,73 @@ const baseUrl = "http://localhost:3000";
 window.addEventListener("load", paginaCarregou);
 
 function paginaCarregou() {
+  verificaValidadoToken();
   formarCard();
 }
 function getPayload() {
   const token = localStorage.getItem("token");
   const payload = JSON.parse(atob(token.split(".")[1]));
   return payload;
+}
+async function listarProdutos(modalParaFechar) {
+  let formsProdutos = "";
+  switch (modalParaFechar) {
+    case "modalCadastro":
+      formsProdutos = document.querySelector("div.modalCadastro");
+      break;
+    case "modalEdicao":
+      formsProdutos = document.querySelector("div.modalEdicao");
+      break;
+  }
+  try {
+    const respostaApi = await fetch(`${baseUrl}/listarProdutos`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+    });
+    const listarProdutos = await respostaApi.json();
+    formsProdutos.innerHTML = "";
+    for (let produto of listarProdutos) {
+      formsProdutos.innerHTML += `
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          value="${produto.id}"
+          id="${produto.nome}"
+          name="produto"
+        />
+        <label class="form-check-label" for="${produto.nome}">
+          ${produto.nome} <span class="preco">R$ ${produto.preco}</span>
+        </label>
+      </div>`;
+    }
+    formsProdutos.innerHTML += `
+    <div class="mb-3 mt-3">
+      <label for="exampleFormControlTextarea1" class="form-label"
+        >Obserções sobre o preparo do pedido</label
+      >
+      <textarea
+        class="form-control"
+        id="observacaoPedidoEdicao"
+        rows="3"
+      ></textarea>
+    </div>`;
+  } catch (error) {
+    mostrarMessage(error.message);
+  }
+}
+function verificaValidadoToken() {
+  const payload = getPayload();
+  if (payload.exp) {
+    const expDate = new Date(payload.exp * 1000); // Multiplicando por 1000 para converter segundos em milissegundos
+    const dataHoje = new Date();
+
+    if (expDate < dataHoje) {
+      localStorage.clear();
+      window.location.href = "../index.html";
+    }
+  }
 }
 async function getPedidos() {
   const payload = getPayload();
@@ -48,7 +109,7 @@ async function formarCard() {
             <p>${pedido.observacao}</p>
           </div>
           <div class="card-body d-flex flex-column">
-            <h6 class="negrito preco">Preço: R$${pedido.preco},00</h6>
+            <h6 class="negrito preco">Preço: R$${pedido.preco}</h6>
           </div>
           <div class="card-body d-flex flex-column">
             <button
@@ -62,6 +123,7 @@ async function formarCard() {
               class="btn btn-success"
               data-bs-toggle="modal"
               data-bs-target="#modalEdicao"
+              onclick="recolocarValores(${pedido.id})"
             >
               Editar
             </button>
@@ -70,6 +132,48 @@ async function formarCard() {
     }
   }
   hideLoader();
+}
+let idDoPedidoQueSeraAtualizado;
+
+async function editarPedido() {
+  const novoIdProduto = verificarRadioSelecionado();
+  const novaObservacao = document.querySelector(
+    "textarea#observacaoPedidoEdicao"
+  ).value;
+  try {
+    const respostaApi = await fetch(`${baseUrl}/atualizarPedido`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      body: JSON.stringify({
+        idPedido: idDoPedidoQueSeraAtualizado,
+        novoIdProduto: novoIdProduto,
+        novaObservacao: novaObservacao,
+      }),
+    });
+    const message = await respostaApi.json();
+    fechaModal("modalEdicao");
+    await formarCard();
+    mostrarMessage(message.message);
+  } catch (error) {
+    mostrarMessage(error.message);
+  }
+}
+async function recolocarValores(idPedido) {
+  await listarProdutos("modalEdicao");
+  idDoPedidoQueSeraAtualizado = idPedido;
+  const respostaApi = await fetch(`${baseUrl}/listarUmPedido/${idPedido}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    mode: "cors",
+  });
+  const pedido = await respostaApi.json();
+  remarcarRadio(pedido.idProduto);
+  const textAreaObservacao = document.querySelector(
+    "textarea#observacaoPedidoEdicao"
+  );
+  textAreaObservacao.value = pedido.observacao;
+  pedidoParaEditar = pedido.idPedido;
 }
 function verificarRadioSelecionado() {
   // Obtém todos os elementos de input do tipo radio dentro da div mãe
@@ -80,6 +184,15 @@ function verificarRadioSelecionado() {
     if (radio.checked) {
       // O radio está marcado, faça algo com ele
       return radio.value;
+    }
+  }
+}
+function remarcarRadio(valueDoRadioParaMarcar) {
+  const radios = document.querySelectorAll('.modal-body input[type="radio"]');
+
+  for (const radio of radios) {
+    if (radio.value == valueDoRadioParaMarcar) {
+      radio.checked = true;
     }
   }
 }
@@ -106,7 +219,6 @@ async function fazerPedido() {
   try {
     const retornoApi = await fetch(`${baseUrl}/fazerPedido`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       mode: "cors",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -116,6 +228,7 @@ async function fazerPedido() {
       }),
     });
     const message = await retornoApi.json();
+    fechaModal("modalCadastro");
     mostrarMessage(message.message);
     await formarCard();
   } catch (error) {
@@ -147,4 +260,18 @@ function mostrarMessage(message) {
 }
 function fecharAviso() {
   document.getElementById("aviso").style.display = "none";
+}
+function fechaModal(modalEspecifico) {
+  //fecha os modais de formulários
+  let modalParaFechar;
+  switch (modalEspecifico) {
+    case "modalCadastro":
+      modalParaFechar = document.querySelector("#modalCadastro");
+      break;
+    case "modalEdicao":
+      modalParaFechar = document.querySelector("#modalEdicao");
+      break;
+  }
+  const modal = bootstrap.Modal.getInstance(modalParaFechar);
+  modal.hide();
 }
