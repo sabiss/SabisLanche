@@ -4,6 +4,7 @@ function fecharAviso() {
 }
 
 async function enviar(acao) {
+  limparToken();
   const email = document.querySelector("input#email").value;
   const senha = document.querySelector("input#senha").value;
 
@@ -54,4 +55,7 @@ function mostrarMessage(message) {
   setTimeout(() => {
     card.style.display = "none";
   }, 5000);
+}
+function limparToken() {
+  localStorage.clear();
 }
