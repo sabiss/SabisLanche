@@ -10,14 +10,17 @@ function getPayload() {
   const payload = JSON.parse(atob(token.split(".")[1]));
   return payload;
 }
-async function listarProdutos(modalParaFechar) {
+async function listarProdutos(modal) {
   let formsProdutos = "";
-  switch (modalParaFechar) {
+  let idTextarea = ""
+  switch (modal) {
     case "modalCadastro":
       formsProdutos = document.querySelector("div.modalCadastro");
+      idTextarea = "observacaoCadastro"
       break;
     case "modalEdicao":
       formsProdutos = document.querySelector("div.modalEdicao");
+      idTextarea = "observacaoEdicao"
       break;
   }
   try {
@@ -50,7 +53,7 @@ async function listarProdutos(modalParaFechar) {
       >
       <textarea
         class="form-control"
-        id="observacaoPedidoEdicao"
+        id='${idTextarea}'
         rows="3"
       ></textarea>
     </div>`;
@@ -138,7 +141,7 @@ let idDoPedidoQueSeraAtualizado;
 async function editarPedido() {
   const novoIdProduto = verificarRadioSelecionado();
   const novaObservacao = document.querySelector(
-    "textarea#observacaoPedidoEdicao"
+    "textarea#observacaoEdicao"
   ).value;
   try {
     const respostaApi = await fetch(`${baseUrl}/atualizarPedido`, {
@@ -170,7 +173,7 @@ async function recolocarValores(idPedido) {
   const pedido = await respostaApi.json();
   remarcarRadio(pedido.idProduto);
   const textAreaObservacao = document.querySelector(
-    "textarea#observacaoPedidoEdicao"
+    "textarea#observacaoEdicao"
   );
   textAreaObservacao.value = pedido.observacao;
   pedidoParaEditar = pedido.idPedido;
@@ -213,7 +216,7 @@ async function fazerPedido() {
   const payload = await getPayload();
   const idUsuario = payload.id;
   const observacao = document.querySelector(
-    "textarea#observacaoCadastroPedido"
+    "textarea#observacaoCadastro"
   ).value;
 
   try {
