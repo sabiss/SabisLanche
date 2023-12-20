@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model cardapio {
+  nome    String    @unique(map: "nome_unico") @db.VarChar
+  preco   Float
+  id      Int       @id @default(autoincrement())
+  pedidos pedidos[]
+}
+
+model pedidos {
+  id_pedido  Int       @id @default(autoincrement())
+  id_usuario Int
+  id_produto Int?
+  observacao String?
+  cardapio   cardapio? @relation(fields: [id_produto], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  usuarios   usuarios  @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model usuarios {
+  email   String    @id @db.VarChar(255)
+  senha   String?   @db.VarChar(255)
+  id      Int       @unique @default(autoincrement())
+  pedidos pedidos[]
+}
