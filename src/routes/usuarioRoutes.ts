@@ -6,3 +6,5 @@ const routes = Router();
 routes.post("/usuario", (req: Request, res: Response) => {
   criarController.handle(req, res);
 });
+
+export default routes;
