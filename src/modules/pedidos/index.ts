@@ -3,6 +3,8 @@ import { criarPedidoController } from "./controllers/criarPedidoController";
 import { PrismaPedidosRepository } from "./repositories/implementations/prismaPedidosRepository";
 import { ListarPedidosService } from "./services/listarPedidosService";
 import { ListarPedidosController } from "./controllers/listarPedidosController";
+import { ListarUmPedidoService } from "./services/listarUmPedidoService";
+import { ListarUmPedidoController } from "./controllers/listarUmPedidoController";
 
 const repository = new PrismaPedidosRepository();
 
@@ -14,4 +16,12 @@ const listarPedidosController = new ListarPedidosController(
   listarPedidosService
 );
 
-export { fazerPedidoController, listarPedidosController };
+const listarUmPedidoService = new ListarUmPedidoService(repository);
+const listarUmPedidoController = new ListarUmPedidoController(
+  listarUmPedidoService
+);
+export {
+  fazerPedidoController,
+  listarPedidosController,
+  listarUmPedidoController,
+};
