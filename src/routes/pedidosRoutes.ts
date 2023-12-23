@@ -14,6 +14,6 @@ routes
   .get("/pedidos", (req: Request, res: Response) => {
     listarPedidosController.handle(req, res);
   })
-  .get("/pedido", (req: Request, res: Response) => {
+  .get("/pedido/:id", (req: Request, res: Response) => {
     listarUmPedidoController.handle(req, res);
   });
