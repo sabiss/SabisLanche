@@ -1,9 +1,10 @@
+import { Request, Response, Router } from "express";
 import {
+  atualizarPedidoController,
   fazerPedidoController,
   listarPedidosController,
   listarUmPedidoController,
 } from "../modules/pedidos";
-import { Request, Response, Router } from "express";
 
 const routes = Router();
 
@@ -16,4 +17,9 @@ routes
   })
   .get("/pedido/:id", (req: Request, res: Response) => {
     listarUmPedidoController.handle(req, res);
+  })
+  .put("/atualizarPedido/:id", (req: Request, res: Response) => {
+    atualizarPedidoController.handle(req, res);
   });
+
+export default routes;
