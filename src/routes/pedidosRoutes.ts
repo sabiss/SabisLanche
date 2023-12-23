@@ -1,6 +1,7 @@
 import {
   fazerPedidoController,
   listarPedidosController,
+  listarUmPedidoController,
 } from "../modules/pedidos";
 import { Request, Response, Router } from "express";
 
@@ -12,4 +13,7 @@ routes
   })
   .get("/pedidos", (req: Request, res: Response) => {
     listarPedidosController.handle(req, res);
+  })
+  .get("/pedido", (req: Request, res: Response) => {
+    listarUmPedidoController.handle(req, res);
   });
