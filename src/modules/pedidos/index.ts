@@ -7,6 +7,8 @@ import { ListarUmPedidoService } from "./services/listarUmPedidoService";
 import { ListarUmPedidoController } from "./controllers/listarUmPedidoController";
 import { AtualizarPedidoService } from "./services/atualizarPedidoService";
 import { AtualizarPedidoController } from "./controllers/atualizarPedidoController";
+import { DeletarPedidoService } from "./services/deletarPedidoService";
+import { DeletarPedidoController } from "./controllers/deletarPedidoController";
 
 const repository = new PrismaPedidosRepository();
 
@@ -28,9 +30,15 @@ const atualizarPedidoController = new AtualizarPedidoController(
   atualizarPedidoService
 );
 
+const deletarPedidoService = new DeletarPedidoService(repository);
+const deletarPedidoController = new DeletarPedidoController(
+  deletarPedidoService
+);
+
 export {
   fazerPedidoController,
   listarPedidosController,
   listarUmPedidoController,
   atualizarPedidoController,
+  deletarPedidoController,
 };
