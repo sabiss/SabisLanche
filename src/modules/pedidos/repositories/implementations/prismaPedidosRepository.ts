@@ -37,7 +37,7 @@ export class PrismaPedidosRepository implements PedidoRepository {
       throw new Error("Erro ao buscar este pedido");
     }
   }
-  async atualizar(
+  async atualizarPedido(
     id: number,
     novoIdProduto: number,
     novaObservacao: string
@@ -49,6 +49,13 @@ export class PrismaPedidosRepository implements PedidoRepository {
       });
     } catch (error) {
       throw new Error("Erro ao atualizar pedido");
+    }
+  }
+  async deletarPedido(id: number): Promise<void> {
+    try {
+      await this.prisma.pedidos.delete({ where: { id } });
+    } catch (error) {
+      throw new Error("Erro ao deletar pedido");
     }
   }
 }
