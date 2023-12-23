@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 import {
   atualizarPedidoController,
+  deletarPedidoController,
   fazerPedidoController,
   listarPedidosController,
   listarUmPedidoController,
@@ -20,6 +21,9 @@ routes
   })
   .put("/atualizarPedido/:id", (req: Request, res: Response) => {
     atualizarPedidoController.handle(req, res);
+  })
+  .delete("/deletarPedido/:id", (req: Request, res: Response) => {
+    deletarPedidoController.handle(req, res);
   });
 
 export default routes;
