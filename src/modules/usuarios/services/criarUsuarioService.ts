@@ -5,7 +5,6 @@ import { UsuarioDTO } from "../dtos/usuarioDTO";
 export class CriarUsuarioServices {
   constructor(private readonly usuarioRepository: UsuarioRepository) {}
   async execute(user: UsuarioDTO): Promise<void> {
-    const usuario = UsuarioMapping.dtoParaEntity(user);
-    await this.usuarioRepository.criar(usuario);
+    await this.usuarioRepository.criar(user);
   }
 }
