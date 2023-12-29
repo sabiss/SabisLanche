@@ -20,10 +20,9 @@ async function enviar(acao) {
           body: JSON.stringify(dados),
         });
         const retornoApi = await respostaLogin.json();
-        if (retornoApi.ok) {
+        if (respostaLogin.ok) {
           const token = retornoApi.token;
           localStorage.setItem("token", token);
-
           window.location.href = "./src/view/index.html";
         } else {
           mostrarMessage(retornoApi.message);
