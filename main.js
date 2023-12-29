@@ -24,7 +24,7 @@ async function enviar(acao) {
           const token = retornoApi.token;
           localStorage.setItem("token", token);
 
-          window.location.href = "./menu/index.html";
+          window.location.href = "./view/index.html";
         } else {
           mostrarMessage(retornoApi.message);
         }
