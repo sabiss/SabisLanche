@@ -20,11 +20,11 @@ async function enviar(acao) {
           body: JSON.stringify(dados),
         });
         const retornoApi = await respostaLogin.json();
-        if (retornoApi.login === true) {
+        if (retornoApi.ok) {
           const token = retornoApi.token;
           localStorage.setItem("token", token);
 
-          window.location.href = "./view/index.html";
+          window.location.href = "./src/view/index.html";
         } else {
           mostrarMessage(retornoApi.message);
         }
@@ -33,12 +33,15 @@ async function enviar(acao) {
       }
       break;
     case "cadastrar":
-      const respostaCadastro = await fetch("http://localhost:3000/cadastro", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        mode: "cors",
-        body: JSON.stringify(dados),
-      });
+      const respostaCadastro = await fetch(
+        "http://localhost:3000/cadastroUsuario",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          mode: "cors",
+          body: JSON.stringify(dados),
+        }
+      );
 
       const message = await respostaCadastro.json();
       mostrarMessage(message.message);
