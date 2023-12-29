@@ -6,11 +6,11 @@ export class LogarController {
   async handle(req: Request, res: Response): Promise<Response> {
     try {
       const { email, senha } = req.body;
-      const usuario = await this.service.execute(email, senha);
-      if (!usuario) {
+      const token = await this.service.execute(email, senha);
+      if (!token) {
         return res.status(404).send({ message: "Usuário não encontrado" });
       }
-      return res.status(200).json(usuario);
+      return res.status(200).json(token);
     } catch (error) {
       return res.status(500).send({ message: "Erro ao fazer login" });
     }

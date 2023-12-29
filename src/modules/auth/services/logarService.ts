@@ -1,10 +1,10 @@
-import { UsuarioEntity } from "../../usuarios/entities/usuarioEntity";
+import { Token } from "../entities/tokenEntity";
 import { AuthRepository } from "../repositories/authRepository";
 
 export class LogarService {
   constructor(private readonly repository: AuthRepository) {}
-  async execute(email: string, senha: string): Promise<UsuarioEntity> {
-    const usuario = await this.repository.logar(email, senha);
-    return usuario;
+  async execute(email: string, senha: string): Promise<Token> {
+    const token = await this.repository.logar(email, senha);
+    return token;
   }
 }
