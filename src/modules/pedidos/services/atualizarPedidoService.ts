@@ -7,6 +7,6 @@ export class AtualizarPedidoService {
     novoIdProduto: number,
     novaObservaca: string
   ): Promise<void> {
-    await this.repository.atualizar(id, novoIdProduto, novaObservaca);
+    await this.repository.atualizarPedido(id, novoIdProduto, novaObservaca);
   }
 }
