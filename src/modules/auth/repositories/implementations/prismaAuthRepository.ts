@@ -12,7 +12,7 @@ export class PrismaAuthRepository implements AuthRepository {
   async logar(email: string, senha: string): Promise<UsuarioEntity> {
     try {
       const usuario = await this.prisma.usuarios.findFirstOrThrow({
-        where: { email: email, senha: senha },
+        where: { email, senha },
       });
       return UsuarioMappingPrisma.converterParaEntidadeUsuario(usuario);
     } catch (error) {
