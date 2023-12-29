@@ -6,7 +6,7 @@ export class LogarController {
   async handle(req: Request, res: Response): Promise<Response> {
     try {
       const { email, senha } = req.body;
-      const token = await this.service.execute(email, senha);
+      const token = await this.service.execute(email, String(senha));
       if (!token) {
         return res.status(404).send({ message: "Usuário não encontrado" });
       }
