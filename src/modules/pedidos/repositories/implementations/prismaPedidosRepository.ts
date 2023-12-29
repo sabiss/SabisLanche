@@ -37,6 +37,18 @@ export class PrismaPedidosRepository implements PedidoRepository {
       throw new Error("Erro ao buscar este pedido");
     }
   }
+  async listarPedidosDeUmUsuario(id_usuario: number): Promise<PedidoEntity[]> {
+    try {
+      const pedidos = await this.prisma.pedidos.findMany({
+        where: { id_usuario: id_usuario },
+      });
+      return pedidos.map((pedido) =>
+        PedidoMappingPrisma.converterParaEntidade(pedido)
+      );
+    } catch (error) {
+      throw new Error("Erro ao listar seus pedidos");
+    }
+  }
   async atualizarPedido(
     id: number,
     novoIdProduto: number,
