@@ -9,8 +9,8 @@ body {
   color: #4caf50;
 }
 .fastFood {
-  background: url(../assets/pexels-valeria-boltneva-1639557.jpg) center / cover
-    no-repeat;
+  background: url(../../assets/pexels-valeria-boltneva-1639557.jpg) center /
+    cover no-repeat;
 }
 .cardComanda {
   padding: 20px;
