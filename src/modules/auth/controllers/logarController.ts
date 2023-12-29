@@ -7,7 +7,6 @@ export class LogarController {
     try {
       const { email, senha } = req.body;
       const usuario = await this.service.execute(email, senha);
-
       if (!usuario) {
         return res.status(404).send({ message: "Usuário não encontrado" });
       }
