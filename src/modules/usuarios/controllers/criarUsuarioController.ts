@@ -1,7 +1,6 @@
 import { UsuarioDTO } from "../dtos/usuarioDTO";
 import { CriarUsuarioServices } from "../services/criarUsuarioService"; //só tipa
 import { Request, Response } from "express";
-import { UsuarioMappingPrisma } from "../mapping/usuariosMappingPrisma";
 
 export class CriarUsuarioController {
   constructor(private readonly service: CriarUsuarioServices) {}
