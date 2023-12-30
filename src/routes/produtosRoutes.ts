@@ -13,3 +13,5 @@ routes
   .get("/listarUmProduto/:id", (req: Request, res: Response) => {
     listarUmProdutoController.handle(req, res);
   });
+
+export default routes;
