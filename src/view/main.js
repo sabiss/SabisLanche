@@ -112,7 +112,7 @@ async function formarCard() {
   showLoader();
   const pedidos = await getPedidos();
   const cardContainer = document.querySelector("main#cardsContainer");
-  if (pedidos.pedidos == false) {
+  if (pedidos.length === 0) {
     cardContainer.innerHTML =
       '<div class="card d-flex justify-content-center align-items-center" style="width: 18rem"><p>Sem Pedidos</p></div>';
   } else {
@@ -247,9 +247,9 @@ async function deletarPedido(id) {
   formarCard();
 }
 async function fazerPedido() {
-  const idProduto = verificarRadioSelecionado();
+  const idProduto = Number(verificarRadioSelecionado());
   const payload = await getPayload();
-  const idUsuario = payload.id;
+  const idUsuario = Number(payload.id);
   const observacao = document.querySelector(
     "textarea#observacaoCadastro"
   ).value;
@@ -260,8 +260,8 @@ async function fazerPedido() {
       mode: "cors",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        idUsuario: idUsuario,
-        idProduto: idProduto,
+        id_usuario: idUsuario,
+        id_produto: idProduto,
         observacao: observacao,
       }),
     });
