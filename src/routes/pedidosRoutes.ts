@@ -4,6 +4,7 @@ import {
   deletarPedidoController,
   fazerPedidoController,
   listarPedidosController,
+  listarPedidosDeUmUsuarioController,
   listarUmPedidoController,
 } from "../modules/pedidos";
 
@@ -18,6 +19,9 @@ routes
   })
   .get("/pedido/:id", (req: Request, res: Response) => {
     listarUmPedidoController.handle(req, res);
+  })
+  .get("/listarSeusPedidos/:id", (req: Request, res: Response) => {
+    listarPedidosDeUmUsuarioController.handle(req, res);
   })
   .put("/atualizarPedido/:id", (req: Request, res: Response) => {
     atualizarPedidoController.handle(req, res);
