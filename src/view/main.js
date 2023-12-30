@@ -12,15 +12,15 @@ function getPayload() {
 }
 async function listarProdutos(modal) {
   let formsProdutos = "";
-  let idTextarea = ""
+  let idTextarea = "";
   switch (modal) {
     case "modalCadastro":
       formsProdutos = document.querySelector("div.modalCadastro");
-      idTextarea = "observacaoCadastro"
+      idTextarea = "observacaoCadastro";
       break;
     case "modalEdicao":
       formsProdutos = document.querySelector("div.modalEdicao");
-      idTextarea = "observacaoEdicao"
+      idTextarea = "observacaoEdicao";
       break;
   }
   try {
@@ -69,24 +69,43 @@ function verificaValidadoToken() {
 
     if (expDate < dataHoje) {
       localStorage.clear();
-      window.location.href = "../index.html";
+      window.location.href = "../../index.html";
     }
   }
 }
 async function getPedidos() {
   const payload = getPayload();
-  const idUsuario = payload.id;
+  const id = payload.id;
   try {
-    const retornoApi = await fetch(`${baseUrl}/pedidos/${idUsuario}`, {
+    const retornoApi = await fetch(`${baseUrl}/listarSeusPedidos/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
     });
 
-    const pedidos = await retornoApi.json();
-    return pedidos;
+    if (retornoApi.ok) {
+      const pedidos = await retornoApi.json();
+      return pedidos;
+    } else {
+      const mensagemDeErro = await retornoApi.json();
+      mostrarMessage(mensagemDeErro.message);
+    }
   } catch (error) {
     mostrarMessage(error.message);
+  }
+}
+async function getProduto(id) {
+  try {
+    const retornoApi = await fetch(`${baseUrl}/listarUmProduto/${id}`);
+    if (retornoApi.ok) {
+      const produto = await retornoApi.json();
+      return produto;
+    } else {
+      const mensagemDeErro = await retornoApi.json();
+      mostrarMessage(mensagemDeErro.message);
+    }
+  } catch (error) {
+    mostrarMessage(error.messase);
   }
 }
 async function formarCard() {
@@ -99,20 +118,21 @@ async function formarCard() {
   } else {
     cardContainer.innerHTML = "";
     for (let pedido of pedidos) {
+      const produto = await getProduto(pedido.id_produto);
       cardContainer.innerHTML += `
       <div class="card mt-4" style="width: 18rem">
           <div class="card-body">
             <h5 class="negrito">Pedido #${pedido.id}</h5>
           </div>
           <ul class="list-group list-group-flush listaPedidos">
-            <li class="list-group-item">${pedido.nome}</li>
+            <li class="list-group-item">${produto.nome}</li>
           </ul>
           <div class="card-body d-flex flex-column observacoes">
             <h5 class="negrito">Observaçoes:</h5>
             <p>${pedido.observacao}</p>
           </div>
           <div class="card-body d-flex flex-column">
-            <h6 class="negrito preco">Preço: R$${pedido.preco}</h6>
+            <h6 class="negrito preco">Preço: R$${produto.preco}</h6>
           </div>
           <div class="card-body d-flex flex-column">
             <button
