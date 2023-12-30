@@ -24,7 +24,7 @@ async function listarProdutos(modal) {
       break;
   }
   try {
-    const respostaApi = await fetch(`${baseUrl}/listarProdutos`, {
+    const respostaApi = await fetch(`${baseUrl}/produtos`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
@@ -94,7 +94,7 @@ async function getPedidos() {
     mostrarMessage(error.message);
   }
 }
-async function getProduto(id) {
+async function getProdutoEspecifico(id) {
   try {
     const retornoApi = await fetch(`${baseUrl}/listarUmProduto/${id}`);
     if (retornoApi.ok) {
@@ -118,7 +118,7 @@ async function formarCard() {
   } else {
     cardContainer.innerHTML = "";
     for (let pedido of pedidos) {
-      const produto = await getProduto(pedido.id_produto);
+      const produto = await getProdutoEspecifico(pedido.id_produto);
       cardContainer.innerHTML += `
       <div class="card mt-4" style="width: 18rem">
           <div class="card-body">
@@ -146,7 +146,7 @@ async function formarCard() {
               class="btn btn-success"
               data-bs-toggle="modal"
               data-bs-target="#modalEdicao"
-              onclick="recolocarValores(${pedido.id})"
+              onclick="recolocarValoresNoModalDeEdicao(${pedido.id})"
             >
               Editar
             </button>
@@ -163,18 +163,27 @@ async function editarPedido() {
   const novaObservacao = document.querySelector(
     "textarea#observacaoEdicao"
   ).value;
+
   try {
-    const respostaApi = await fetch(`${baseUrl}/atualizarPedido`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      mode: "cors",
-      body: JSON.stringify({
-        idPedido: idDoPedidoQueSeraAtualizado,
-        novoIdProduto: novoIdProduto,
-        novaObservacao: novaObservacao,
-      }),
-    });
+    const respostaApi = await fetch(
+      `${baseUrl}/atualizarPedido/${idDoPedidoQueSeraAtualizado}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+        body: JSON.stringify({
+          novoIdProduto: novoIdProduto,
+          novaObservacao: novaObservacao,
+        }),
+      }
+    );
+
     const message = await respostaApi.json();
+
+    if (!respostaApi.ok) {
+      mostrarMessage(message.message);
+    }
+
     fechaModal("modalEdicao");
     await formarCard();
     mostrarMessage(message.message);
@@ -182,21 +191,21 @@ async function editarPedido() {
     mostrarMessage(error.message);
   }
 }
-async function recolocarValores(idPedido) {
+async function recolocarValoresNoModalDeEdicao(idPedido) {
   await listarProdutos("modalEdicao");
   idDoPedidoQueSeraAtualizado = idPedido;
-  const respostaApi = await fetch(`${baseUrl}/listarUmPedido/${idPedido}`, {
+  const respostaApi = await fetch(`${baseUrl}/pedido/${idPedido}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
     mode: "cors",
   });
   const pedido = await respostaApi.json();
-  remarcarRadio(pedido.idProduto);
+  remarcarRadio(pedido.id_produto);
   const textAreaObservacao = document.querySelector(
     "textarea#observacaoEdicao"
   );
   textAreaObservacao.value = pedido.observacao;
-  pedidoParaEditar = pedido.idPedido;
+  pedidoParaEditar = pedido.id_pedido;
 }
 function verificarRadioSelecionado() {
   // Obtém todos os elementos de input do tipo radio dentro da div mãe
@@ -216,16 +225,22 @@ function remarcarRadio(valueDoRadioParaMarcar) {
   for (const radio of radios) {
     if (radio.value == valueDoRadioParaMarcar) {
       radio.checked = true;
+      break;
     }
   }
 }
 async function deletarPedido(id) {
   try {
-    await fetch(`${baseUrl}/deletarPedido/${id}`, {
+    const retorno = await fetch(`${baseUrl}/deletarPedido/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
     });
+
+    if (!retorno.ok) {
+      const mensagemDeErro = await retorno.json();
+      mostrarMessage(mensagemDeErro.message);
+    }
   } catch (error) {
     alert(error.message);
   }
