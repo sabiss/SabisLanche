@@ -1,8 +1,15 @@
 import { Request, Response, Router } from "express";
-import { listarProdutosContoller } from "../modules/produtos";
+import {
+  listarProdutosContoller,
+  listarUmProdutoController,
+} from "../modules/produtos";
 
 const routes = Router();
 
-routes.get("/produtos", (req: Request, res: Response) => {
-  listarProdutosContoller.handle(req, res);
-});
+routes
+  .get("/produtos", (req: Request, res: Response) => {
+    listarProdutosContoller.handle(req, res);
+  })
+  .get("/listarUmProduto/:id", (req: Request, res: Response) => {
+    listarUmProdutoController.handle(req, res);
+  });
