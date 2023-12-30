@@ -57,7 +57,7 @@ export class PrismaPedidosRepository implements PedidoRepository {
     try {
       await this.prisma.pedidos.update({
         where: { id },
-        data: { id: novoIdProduto, observacao: novaObservacao },
+        data: { id_produto: novoIdProduto, observacao: novaObservacao },
       });
     } catch (error) {
       throw new Error("Erro ao atualizar pedido");
