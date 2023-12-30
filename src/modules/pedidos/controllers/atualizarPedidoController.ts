@@ -7,10 +7,14 @@ export class AtualizarPedidoController {
     try {
       const id = req.params.id;
       const { novoIdProduto, novaObservacao } = req.body;
-      await this.service.execute(Number(id), novoIdProduto, novaObservacao);
+      await this.service.execute(
+        Number(id),
+        Number(novoIdProduto),
+        novaObservacao
+      );
       return res.status(200).send({ message: "Pedido Atualizado" });
     } catch (error) {
-      return res.status(500).send({ message: "Erro ao atualizar Pedido" });
+      return res.status(500).send({ message: `Erro ao atualizar - ${error}` });
     }
   }
 }
