@@ -1,11 +1,37 @@
-<h1>CRUD Para controle de pedidos de uma Lanchonete Delivery</h1>
+# CRUD para Controle de Pedidos de uma Lanchonete Delivery
 
-<p>Contando com as tecnologias de javascript, html, css e o framework Bootstrap, O sabisLanche é um site que registrar pedidos que estão sendo guardados em uma API. Estão sendo utilizados os verbos de controle como post, put e delete</p>
-<br>
+Contando com diversas tecnologias, o **SabisLanches** é uma ferramenta para registrar pedidos de uma lanchonete delivery. O site possui separação de usuários, ou seja, cada usuário possui seus pedidos
 
-<h2>Como Fazer o Site Funcionar</h2>
+# Tecnologias Utilizadas
 
-Para executar o site localmente, siga estes passos simples:
+O **sabisLanche** foi desenvolvido utilizando uma combinação de tecnologias para oferecer uma experiência eficiente e funcional. Aqui estão as principais tecnologias utilizadas:
+
+1. **JavaScript, HTML e CSS:**
+
+   - Linguagens fundamentais para o desenvolvimento web, proporcionando a estrutura, o estilo e a interatividade do site.
+
+2. **Bootstrap:**
+
+   - Framework front-end que agiliza o desenvolvimento com componentes predefinidos e estilos responsivos, garantindo um layout visualmente atraente.
+
+3. **Express:**
+
+   - Framework Node.js para construção de APIs robustas, simplificando o roteamento e gerenciamento de requisições HTTP.
+
+4. **Nodemon:**
+
+   - Ferramenta de desenvolvimento que monitora alterações nos arquivos e reinicia automaticamente o servidor, facilitando o processo de desenvolvimento.
+
+5. **Prisma:**
+
+   - ORM (Object-Relational Mapping) para TypeScript e JavaScript, utilizado para facilitar a interação com o banco de dados Postgres e simplificar operações de CRUD.
+
+6. **JsonWebToken (JWT):**
+   - Biblioteca para geração e verificação de tokens de autenticação, proporcionando segurança e controle de acesso ao sistema.
+
+Essas tecnologias foram escolhidas para proporcionar uma base sólida, eficiente e moderna para o desenvolvimento do **sabisLanche**, garantindo uma experiência de usuário fluida e uma arquitetura robusta nos bastidores.
+
+## Como Fazer o Site Funcionar
 
 1. **Baixe o Repositório:**
 
@@ -36,18 +62,24 @@ Para executar o site localmente, siga estes passos simples:
 6. **Pronto:**
    - O site agora está funcionando localmente. Abra o navegador e acesse o endereço indicado pelo servidor de desenvolvimento para interagir com o site.
 
-Certifique-se de que todas as etapas foram concluídas corretamente para garantir o funcionamento adequado do site em seu ambiente local.
+## Funcionalidades
 
-<h2>Funcionalidades</h2>
-<h3>Página como um todo</h3>
-<p>O site conta com um visual temático de fast Foods e bem fácil de usar</p>
-<img src ="./assets/midias-README/página.png" alt="Imagem da página como um todo">
-<h3>Cadastro de dados</h3>
-<p>Ao clicar no votão redondo, amarelo e com símbolo de adição, o usuário é apresentado ao modal forms de cadastro de pedidos onde irá preencher seu nome, telefone, endereço e quais os produtos deseja pedir</p>
-<img src ="./assets/midias-README/modalCadastro.png" alt="Imagem do formulário de cadastro de pedidos">
-<h3>Edição dos pedidos já registrados</h3>
-<p>Ao clicar no botão verde presente dentro do card do pedido, o usuário é apresentado à um forms semelhante ao usado para o cadastro de pedidos, mas este já vem com as informações do pedido registrado. Sendo assim, apenas esperando o usuário registrar uma alteração nessas informações</p>
-<img src ="./assets/midias-README/modalEdicao.png" alt="Imagem do formulário de edição das informações de um pedido já registrado">
-<h3>Concluir/Deletar pedido</h3>
-<p>Para concluir ou deletar um pedido basta clicar no botão azul localizado dentro do card do pedido que ele automaticamente sumirá da página e do registro na API</p>
-<img src="./assets/midias-README/concluirOuDeletar.png" alt="Imagem da página como uma toda com a presença de uma seta indicando onde é o botão de concluir ou deletar">
+### Página como um Todo
+
+O site conta com um visual temático de fast foods e é fácil de usar.
+![Imagem da página como um todo](./assets/midias-README/página.png)
+
+### Cadastro de Dados
+
+Ao clicar no botão redondo, amarelo e com símbolo de adição, o usuário é apresentado ao modal de cadastro de pedidos, onde preencherá seu nome, telefone, endereço e os produtos desejados.
+![Imagem do formulário de cadastro de pedidos](./assets/midias-README/modalCadastro.png)
+
+### Edição dos Pedidos Já Registrados
+
+Ao clicar no botão verde dentro do card do pedido, o usuário é apresentado a um formulário semelhante ao usado para o cadastro, mas já preenchido com as informações do pedido registrado, aguardando apenas a confirmação de alterações.
+![Imagem do formulário de edição das informações de um pedido já registrado](./assets/midias-README/modalEdicao.png)
+
+### Concluir/Deletar Pedido
+
+Para concluir ou deletar um pedido, basta clicar no botão azul dentro do card do pedido, que o pedido será removido da página e do registro na API.
+![Imagem da página com destaque para o botão de concluir ou deletar](./assets/midias-README/concluirOuDeletar.png)
