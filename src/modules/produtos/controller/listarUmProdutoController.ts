@@ -16,7 +16,9 @@ export class ListarUmProdutoController {
     } catch (error) {
       return res
         .status(500)
-        .send({ message: "Erro ao listar este produto em específico" });
+        .send({
+          message: `Erro ao listar este produto em específico - ${error}`,
+        });
     }
   }
 }
