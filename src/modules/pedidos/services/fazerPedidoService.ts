@@ -2,7 +2,7 @@ import { PedidoDTO } from "../dtos/pedidosDTO";
 import { PedidoRepository } from "../repositories/pedidosRepository";
 import { PedidoMapping } from "../mappings/pedidoMapping";
 
-export class criarPedidoService {
+export class FazerPedidoService {
   constructor(private readonly repository: PedidoRepository) {}
   async execute(ordem: PedidoDTO): Promise<void> {
     const pedido = PedidoMapping.dtoParaEntity(ordem);

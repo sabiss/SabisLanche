@@ -1,9 +1,9 @@
 import { PedidoDTO } from "../dtos/pedidosDTO";
-import { criarPedidoService } from "../services/criarPedidoService";
+import { FazerPedidoService } from "../services/fazerPedidoService";
 import { Request, Response } from "express";
 
-export class criarPedidoController {
-  constructor(private readonly service: criarPedidoService) {}
+export class FazerPedidoController {
+  constructor(private readonly service: FazerPedidoService) {}
   async handle(req: Request, res: Response): Promise<Response> {
     const pedido = <PedidoDTO>req.body;
     await this.service.execute(pedido);
