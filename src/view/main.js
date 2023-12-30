@@ -275,7 +275,7 @@ async function fazerPedido() {
 }
 function logout() {
   localStorage.clear();
-  window.location.href = "../index.html";
+  window.location.href = "../../index.html";
 }
 function showLoader() {
   const loader = document.getElementById("loader");
