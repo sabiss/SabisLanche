@@ -23,7 +23,7 @@ export class PrismaPedidosRepository implements PedidoRepository {
         PedidoMappingPrisma.converterParaEntidade(user)
       );
     } catch (error) {
-      throw new Error("Erro ao listar pedidos");
+      throw new Error(`${error}`);
     }
   }
   async listarUmPedido(id: number): Promise<PedidoEntity> {
@@ -33,7 +33,7 @@ export class PrismaPedidosRepository implements PedidoRepository {
       });
       return PedidoMappingPrisma.converterParaEntidade(pedido);
     } catch (error) {
-      throw new Error("Erro ao buscar este pedido");
+      throw new Error(`${error}`);
     }
   }
   async listarPedidosDeUmUsuario(id_usuario: number): Promise<PedidoEntity[]> {
@@ -45,7 +45,7 @@ export class PrismaPedidosRepository implements PedidoRepository {
         PedidoMappingPrisma.converterParaEntidade(pedido)
       );
     } catch (error) {
-      throw new Error("Erro ao listar seus pedidos");
+      throw new Error(`${error}`);
     }
   }
   async atualizarPedido(
@@ -59,14 +59,14 @@ export class PrismaPedidosRepository implements PedidoRepository {
         data: { id_produto: novoIdProduto, observacao: novaObservacao },
       });
     } catch (error) {
-      throw new Error(`Erro ao atualizar pedido - ${error}`);
+      throw new Error(`${error}`);
     }
   }
   async deletarPedido(id: number): Promise<void> {
     try {
       await this.prisma.pedidos.delete({ where: { id } });
     } catch (error) {
-      throw new Error("Erro ao deletar pedido");
+      throw new Error(`${error}`);
     }
   }
 }

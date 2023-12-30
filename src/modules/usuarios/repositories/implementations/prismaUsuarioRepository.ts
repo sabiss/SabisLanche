@@ -15,7 +15,7 @@ export class PrismaUsuarioRepository implements UsuarioRepository {
       const usuario = UsuarioMappingPrisma.converterParaUsuarioPrisma(user);
       await this.prisma.usuarios.create({ data: usuario });
     } catch (error) {
-      throw new Error("Erro ao criar usuário");
+      throw new Error(`${error}`);
     }
   }
   async buscarPorId(id: number): Promise<UsuarioEntity> {
@@ -25,7 +25,7 @@ export class PrismaUsuarioRepository implements UsuarioRepository {
       });
       return UsuarioMappingPrisma.converterParaEntidadeUsuario(usuario);
     } catch (error) {
-      throw new Error("Erro ao buscar esse usuário");
+      throw new Error(`${error}`);
     }
   }
 }

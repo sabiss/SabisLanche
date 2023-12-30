@@ -9,13 +9,23 @@ export class PrismaProdutoRepository implements ProdutoRepository {
     this.prisma = new PrismaClient();
   }
   async listarProdutos(): Promise<ProdutoEntity[]> {
-    const produtos = await this.prisma.cardapio.findMany();
-    return produtos.map((produto) => PrismaProdutosMapping.paraEntity(produto));
+    try {
+      const produtos = await this.prisma.cardapio.findMany();
+      return produtos.map((produto) =>
+        PrismaProdutosMapping.paraEntity(produto)
+      );
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
   }
   async listarUmProduto(id: number): Promise<ProdutoEntity> {
-    const produto = await this.prisma.cardapio.findFirstOrThrow({
-      where: { id },
-    });
-    return PrismaProdutosMapping.paraEntity(produto);
+    try {
+      const produto = await this.prisma.cardapio.findFirstOrThrow({
+        where: { id },
+      });
+      return PrismaProdutosMapping.paraEntity(produto);
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
   }
 }

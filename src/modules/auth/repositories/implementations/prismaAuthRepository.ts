@@ -30,7 +30,7 @@ export class PrismaAuthRepository implements AuthRepository {
 
       return { token };
     } catch (error) {
-      throw new Error("Erro ao fazer login");
+      throw new Error(`${error}`);
     }
   }
   async verificarExistencia(email: string): Promise<UsuarioEntity> {
@@ -40,7 +40,7 @@ export class PrismaAuthRepository implements AuthRepository {
       });
       return UsuarioMappingPrisma.converterParaEntidadeUsuario(usuario);
     } catch (error) {
-      throw new Error("Erro ao buscar cadastro de usuário");
+      throw new Error(`${error}`);
     }
   }
 }

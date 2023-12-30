@@ -12,7 +12,11 @@ export class ListarUmPedidoController {
       }
       return res.status(200).json(pedido);
     } catch (error) {
-      return res.status(500).send({ message: "Erro ao buscar Pedido" });
+      return res
+        .status(500)
+        .send({
+          message: `Erro ao listar este produto em específico - ${error}`,
+        });
     }
   }
 }

@@ -12,7 +12,9 @@ export class LogarController {
       }
       return res.status(200).json(token);
     } catch (error) {
-      return res.status(500).send({ message: "Erro ao fazer login" });
+      return res
+        .status(500)
+        .send({ message: `Erro ao fazer login - ${error}` });
     }
   }
 }

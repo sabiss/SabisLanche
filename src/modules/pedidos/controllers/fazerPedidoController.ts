@@ -5,8 +5,14 @@ import { Request, Response } from "express";
 export class FazerPedidoController {
   constructor(private readonly service: FazerPedidoService) {}
   async handle(req: Request, res: Response): Promise<Response> {
-    const pedido = <PedidoDTO>req.body;
-    await this.service.execute(pedido);
-    return res.status(200).send({ message: "Pedido Criado" });
+    try {
+      const pedido = <PedidoDTO>req.body;
+      await this.service.execute(pedido);
+      return res.status(200).send({ message: `Pedido Criado` });
+    } catch (error) {
+      return res
+        .status(500)
+        .send({ message: `Erro ao fazer pedido - ${error}` });
+    }
   }
 }

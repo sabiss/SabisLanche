@@ -10,8 +10,9 @@ export class ListarPedidosDeUmUsuarioController {
       const pedidos = await this.service.execute(id_usuario);
       return res.status(200).json(pedidos);
     } catch (error) {
-      console.log(error);
-      return res.status(500).send({ message: "Erro ao listar seus produtos" });
+      return res
+        .status(500)
+        .send({ message: `Erro ao listar seus produtos - ${error}` });
     }
   }
 }
