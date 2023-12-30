@@ -1,7 +1,7 @@
 {
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node app.ts"
+    "dev": "nodemon --exec ts-node app.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.7.1",
