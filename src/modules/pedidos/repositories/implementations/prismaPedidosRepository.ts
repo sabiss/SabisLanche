@@ -60,7 +60,7 @@ export class PrismaPedidosRepository implements PedidoRepository {
         data: { id_produto: novoIdProduto, observacao: novaObservacao },
       });
     } catch (error) {
-      throw new Error("Erro ao atualizar pedido");
+      throw new Error(`Erro ao atualizar pedido - ${error}`);
     }
   }
   async deletarPedido(id: number): Promise<void> {
