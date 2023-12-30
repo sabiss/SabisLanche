@@ -11,10 +11,9 @@ export class PrismaPedidosRepository implements PedidoRepository {
 
   async fazerPedido(pedido: PedidoEntity): Promise<void> {
     try {
-      const pedidoConvertido = PedidoMappingPrisma.converterParaPrisma(pedido);
-      await this.prisma.pedidos.create({ data: pedidoConvertido });
+      await this.prisma.pedidos.create({ data: pedido });
     } catch (error) {
-      throw new Error("Erro ao fazer pedido");
+      throw new Error(`${error}`);
     }
   }
   async listarPedidos(): Promise<PedidoEntity[]> {
