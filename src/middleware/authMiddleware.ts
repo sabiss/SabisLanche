@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { Request, Response, NextFunction } from "express";
-import jwt, { Secret } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 const auth = async (req: Request, res: Response, next: NextFunction) => {
   const prisma = new PrismaClient();
@@ -12,7 +12,7 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization.split(" ")[1];
 
   try {
-    const secret = process.env.SECRET as Secret;
+    const secret = "kswijdwknhj"
     const payload = jwt.verify(token, secret) as { email: string };
     const email = payload.email;
     const usuario = await prisma.usuarios.findFirstOrThrow({ where: { email } });

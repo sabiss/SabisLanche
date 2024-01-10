@@ -22,7 +22,7 @@ export class PrismaAuthRepository implements AuthRepository {
           id: usuario.id,
           email: usuario.email,
         },
-        `${process.env.SECRET}`,
+        `kswijdwknhj`,
         {
           expiresIn: "1h",
         }
