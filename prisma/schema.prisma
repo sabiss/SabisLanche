@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgres://aluno_20201214010012:1269@177.136.200.206:5439/temp?schema=aluno_20201214010012"
 }
 
 model cardapio {
@@ -25,7 +25,7 @@ model pedidos {
 
 model usuarios {
   email   String    @id @db.VarChar(255)
-  senha   String   @db.VarChar(255)
+  senha   String    @db.VarChar(255)
   id      Int       @unique @default(autoincrement())
   pedidos pedidos[]
 }
