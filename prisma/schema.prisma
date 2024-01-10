@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgres://aluno_20201214010012:1269@177.136.200.206:5439/temp?schema=aluno_20201214010012"
+  url      = "postgresql://postgres:root@localhost:5432/postgres?schema=public"
 }
 
 model cardapio {
