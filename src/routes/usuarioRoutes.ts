@@ -7,8 +7,5 @@ routes
   .get("/usuario/:id", (req: Request, res: Response) => {
     buscarPorIdController.handle(req, res);
   })
-  .post("/cadastroUsuario", (req: Request, res: Response) => {
-    criarController.handle(req, res);
-  });
 
 export default routes;
