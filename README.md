@@ -48,18 +48,23 @@ Essas tecnologias foram escolhidas para proporcionar uma base sólida, eficiente
      npm install
      ```
 
-4. **Inicie o Servidor de Desenvolvimento:**
+4. **Crie um Servidor Postgres em Sua Máquina:**
 
-   - Após a conclusão da instalação, inicie o servidor de desenvolvimento com o seguinte comando:
+   - vá até o aplicativo de gerenciamento de banco de dados de sua preferência
+   - crie todas as tabelas que estão no arquivo migration da pasta 20240110191638_db_modelo_fisico que está dentro da pasta prisma
+
+5. **Inicie o Servidor de Desenvolvimento:**
+
+   - Após a conclusão da instalação, inicie o servidor de desenvolvimento com o seguinte comando no terminal do vscode o qual está aberto a pasta do projeto:
      ```bash
      npm run dev
      ```
 
-5. **Aguarde a Confirmação de que a API Está Rodando:**
+6. **Aguarde a Confirmação de que a API Está Rodando:**
 
    - Assim que a API estiver rodando, você receberá uma mensagem no terminal indicando que está pronta para ser usada.
 
-6. **Pronto:**
+7. **Pronto:**
    - O site agora está funcionando localmente. Abra o navegador e acesse o endereço indicado pelo servidor de desenvolvimento para interagir com o site.
 
 ## Funcionalidades
