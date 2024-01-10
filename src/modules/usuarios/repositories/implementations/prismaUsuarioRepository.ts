@@ -12,8 +12,7 @@ export class PrismaUsuarioRepository implements UsuarioRepository {
 
   async criar(user: UsuarioEntity): Promise<void> {
     try {
-      const usuario = UsuarioMappingPrisma.converterParaUsuarioPrisma(user);
-      await this.prisma.usuarios.create({ data: usuario });
+      await this.prisma.usuarios.create({ data: user });
     } catch (error) {
       throw new Error(`${error}`);
     }
